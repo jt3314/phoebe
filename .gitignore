@@ -1,0 +1,40 @@
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+build/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+
+# CocoaPods (if used later)
+Pods/
+
+# Supabase
+supabase/.branches
+supabase/.temp
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Node (for edge functions)
+node_modules/
