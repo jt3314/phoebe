@@ -19,6 +19,8 @@ struct Task_: Codable, Identifiable, Sendable {
     var completedDate: String?
     var status: TaskStatus
     var sortOrder: Int
+    var recurringPattern: String?
+    var recurringOverrideDate: String?
     let createdAt: Date
     var updatedAt: Date
 
@@ -31,6 +33,8 @@ struct Task_: Codable, Identifiable, Sendable {
         case scheduledDate = "scheduled_date"
         case completedDate = "completed_date"
         case sortOrder = "sort_order"
+        case recurringPattern = "recurring_pattern"
+        case recurringOverrideDate = "recurring_override_date"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

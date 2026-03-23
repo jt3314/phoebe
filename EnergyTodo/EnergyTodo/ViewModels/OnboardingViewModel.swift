@@ -6,13 +6,15 @@ final class OnboardingViewModel {
     enum Step: Int, CaseIterable {
         case cycleLength = 0
         case day1Date = 1
-        case confirm = 2
+        case schedulingDirection = 2
+        case confirm = 3
     }
 
     var currentStep: Step = .cycleLength
     var cycleLength: Int = AppConstants.defaultCycleLength
     var day1Date: Date = Date()
     var customLengthText = ""
+    var schedulingDirection: String = "early"
     var isProcessing = false
     var errorMessage: String?
 
@@ -58,11 +60,17 @@ final class OnboardingViewModel {
         isProcessing = true
         errorMessage = nil
         do {
-            _ = try await cycleService.createCycle(
+            let cycle = try await cycleService.createCycle(
                 userId: userId,
                 length: cycleLength,
                 day1Date: day1DateString
             )
+            // Save scheduling direction
+            try await supabase
+                .from("cycles")
+                .update(["scheduling_direction": schedulingDirection])
+                .eq("id", value: cycle.id.uuidString)
+                .execute()
             isProcessing = false
             return true
         } catch {

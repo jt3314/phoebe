@@ -5,6 +5,8 @@ struct Cycle: Codable, Identifiable, Sendable {
     let userId: UUID
     var length: Int
     var day1Date: String // ISO date "YYYY-MM-DD"
+    var schedulingDirection: String
+    var showSeasons: Bool
     let createdAt: Date
     var updatedAt: Date
 
@@ -12,6 +14,8 @@ struct Cycle: Codable, Identifiable, Sendable {
         case id, length
         case userId = "user_id"
         case day1Date = "day1_date"
+        case schedulingDirection = "scheduling_direction"
+        case showSeasons = "show_seasons"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

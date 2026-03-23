@@ -9,6 +9,8 @@ struct StandaloneTask: Codable, Identifiable, Sendable {
     var scheduledDate: String?
     var completedDate: String?
     var status: TaskStatus
+    var recurringPattern: String?
+    var recurringOverrideDate: String?
     let createdAt: Date
     var updatedAt: Date
 
@@ -18,6 +20,8 @@ struct StandaloneTask: Codable, Identifiable, Sendable {
         case effortPoints = "effort_points"
         case scheduledDate = "scheduled_date"
         case completedDate = "completed_date"
+        case recurringPattern = "recurring_pattern"
+        case recurringOverrideDate = "recurring_override_date"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

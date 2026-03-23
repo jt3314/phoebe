@@ -56,8 +56,14 @@ final class AuthViewModel {
         errorMessage = nil
         do {
             let session = try await authService.signUp(email: email, password: password)
-            _cachedUserId = session.user.id
-            await checkOnboardingStatus(userId: session.user.id)
+            if let session {
+                _cachedUserId = session.user.id
+                await checkOnboardingStatus(userId: session.user.id)
+            } else {
+                // Email confirmation required
+                errorMessage = "Check your email for a confirmation link, then sign in."
+                state = .unauthenticated
+            }
         } catch {
             errorMessage = error.localizedDescription
         }

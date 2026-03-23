@@ -11,12 +11,10 @@ struct AuthService {
     }
 
     /// Sign up with email and password.
-    func signUp(email: String, password: String) async throws -> Auth.Session {
+    /// Returns a session if email confirmation is disabled, nil if confirmation is required.
+    func signUp(email: String, password: String) async throws -> Auth.Session? {
         let response = try await supabase.auth.signUp(email: email, password: password)
-        guard let session = response.session else {
-            throw AuthError.noSession
-        }
-        return session
+        return response.session
     }
 
     /// Sign out the current user.

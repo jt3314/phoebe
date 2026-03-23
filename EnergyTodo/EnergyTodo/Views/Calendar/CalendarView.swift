@@ -7,31 +7,35 @@ struct CalendarView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                // View mode picker
-                Picker("View", selection: $vm.viewMode) {
-                    ForEach(CalendarViewModel.ViewMode.allCases, id: \.self) { mode in
-                        Text(mode.rawValue).tag(mode)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                .padding(.top, 8)
+            ZStack {
+                Theme.background.ignoresSafeArea()
 
-                if vm.cycle == nil && !vm.isLoading {
-                    Spacer()
-                    EmptyStateView(
-                        icon: "calendar.badge.exclamationmark",
-                        title: "No cycle configured",
-                        message: "Set up your energy cycle in the Setup tab to see your calendar."
-                    )
-                    Spacer()
-                } else {
-                    switch vm.viewMode {
-                    case .month:
-                        monthView
-                    case .cycle:
-                        cycleView
+                VStack(spacing: 0) {
+                    // View mode picker
+                    Picker("View", selection: $vm.viewMode) {
+                        ForEach(CalendarViewModel.ViewMode.allCases, id: \.self) { mode in
+                            Text(mode.rawValue).tag(mode)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+
+                    if vm.cycle == nil && !vm.isLoading {
+                        Spacer()
+                        EmptyStateView(
+                            icon: "calendar.badge.exclamationmark",
+                            title: "No cycle configured",
+                            message: "Set up your energy cycle in the Setup tab to see your calendar."
+                        )
+                        Spacer()
+                    } else {
+                        switch vm.viewMode {
+                        case .month:
+                            monthView
+                        case .cycle:
+                            cycleView
+                        }
                     }
                 }
             }
@@ -49,22 +53,26 @@ struct CalendarView: View {
 
     private var monthView: some View {
         VStack(spacing: 8) {
-            // Month navigation
             HStack {
                 Button { vm.previousMonth() } label: {
                     Image(systemName: "chevron.left")
+                        .foregroundStyle(Theme.foreground)
                 }
                 Spacer()
                 Text(vm.monthTitle)
                     .font(.headline)
+                    .foregroundStyle(Theme.foreground)
                 Spacer()
                 Button("Today") { vm.goToToday() }
                     .font(.caption)
+                    .foregroundStyle(Theme.primary)
                 Button { vm.nextMonth() } label: {
                     Image(systemName: "chevron.right")
+                        .foregroundStyle(Theme.foreground)
                 }
             }
             .padding(.horizontal)
+            .padding(.top, 8)
 
             // Weekday headers
             let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -72,15 +80,14 @@ struct CalendarView: View {
                 ForEach(weekdays, id: \.self) { day in
                     Text(day)
                         .font(.caption2)
-                        .foregroundStyle(.secondary)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Theme.mutedForeground)
                 }
             }
             .padding(.horizontal, 8)
 
-            // Day cells
             ScrollView {
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 4) {
-                    // Offset for first day of month
                     ForEach(0..<vm.firstWeekdayOffset, id: \.self) { _ in
                         Color.clear.frame(height: 70)
                     }
@@ -93,9 +100,7 @@ struct CalendarView: View {
                             effort: vm.effortForDate(date),
                             showCycleInfo: vm.showCycleInfo
                         )
-                        .onTapGesture {
-                            selectedDate = date
-                        }
+                        .onTapGesture { selectedDate = date }
                     }
                 }
                 .padding(.horizontal, 8)
@@ -119,7 +124,6 @@ struct CalendarView: View {
             }
             .padding()
 
-            // Legend
             legendView
                 .padding(.horizontal)
         }
@@ -132,22 +136,23 @@ struct CalendarView: View {
             Text("Legend")
                 .font(.caption)
                 .fontWeight(.semibold)
+                .foregroundStyle(Theme.foreground)
 
             HStack(spacing: 4) {
                 Text("Low")
                     .font(.caption2)
-                ForEach(AppConstants.effortColors, id: \.self) { hex in
+                    .foregroundStyle(Theme.mutedForeground)
+                ForEach(Theme.lunarColors.indices, id: \.self) { i in
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(Color(hex: hex))
+                        .fill(Theme.lunarColors[i])
                         .frame(width: 20, height: 12)
                 }
                 Text("High")
                     .font(.caption2)
+                    .foregroundStyle(Theme.mutedForeground)
             }
         }
-        .padding()
-        .background(.regularMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .themedCard()
     }
 }
 
@@ -165,11 +170,12 @@ struct MonthDayCellView: View {
             Text("\(Calendar.current.component(.day, from: date))")
                 .font(.caption)
                 .fontWeight(isToday ? .bold : .regular)
+                .foregroundStyle(isToday ? Theme.primary : Theme.foreground)
 
             if showCycleInfo, let cd = cycleDay {
                 Text("D\(cd)")
                     .font(.system(size: 8))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Theme.mutedForeground)
             }
 
             if let effort {
@@ -180,18 +186,18 @@ struct MonthDayCellView: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 70)
-        .background(isToday ? Color.accentColor.opacity(0.1) : Color.clear)
+        .background(isToday ? Theme.primary.opacity(0.08) : Theme.card)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(isToday ? Color.accentColor : Color.clear, lineWidth: 1.5)
+                .stroke(isToday ? Theme.primary : Theme.cardBorder.opacity(0.5), lineWidth: isToday ? 1.5 : 0.5)
         )
     }
 
     private func effortColor(scheduled: Int, available: Int) -> Color {
-        if scheduled > available { return .red }
-        if scheduled == available { return .orange }
-        return .secondary
+        if scheduled > available { return Theme.destructive }
+        if scheduled == available { return Theme.warning }
+        return Theme.mutedForeground
     }
 }
 
@@ -212,21 +218,22 @@ struct CycleDayCellView: View {
                 .font(.caption)
                 .fontWeight(.semibold)
         }
+        .foregroundStyle(intensity > 0.85 ? .white : Theme.foreground)
         .frame(maxWidth: .infinity)
         .aspectRatio(1, contentMode: .fit)
         .background(lunarColor)
         .clipShape(Circle())
         .overlay(
             Circle()
-                .stroke(isCurrentDay ? Color.accentColor : Color.clear, lineWidth: 2)
+                .stroke(isCurrentDay ? Theme.primary : Color.clear, lineWidth: 2.5)
         )
     }
 
     private var lunarColor: Color {
-        if effort == 0 { return Color.secondary.opacity(0.1) }
-        let colors = AppConstants.effortColors
+        if effort == 0 { return Theme.secondary.opacity(0.3) }
+        let colors = Theme.lunarColors
         let index = min(Int(intensity * Double(colors.count - 1)), colors.count - 1)
-        return Color(hex: colors[index])
+        return colors[index]
     }
 }
 

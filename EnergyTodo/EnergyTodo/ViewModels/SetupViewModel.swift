@@ -10,7 +10,18 @@ final class SetupViewModel {
     var newLength: Int = 35
     var isUpdatingLength = false
 
+    // Scheduling direction
+    var schedulingDirection: String = "early"
+
+    // Seasons toggle
+    var showSeasons: Bool = true
+
+    // Tip packs
+    var reminderSources: [ReminderSource] = []
+    var userReminderSources: [UserReminderSource] = []
+
     private let cycleService = CycleService()
+    private let remindersService = RemindersService()
 
     var currentCycleDay: Int? {
         guard let cycle else { return nil }
@@ -32,7 +43,15 @@ final class SetupViewModel {
             if let cycle {
                 effortPoints = try await cycleService.fetchEffortPoints(cycleId: cycle.id)
                 newLength = cycle.length
+                schedulingDirection = cycle.schedulingDirection
+                showSeasons = cycle.showSeasons
             }
+
+            // Load tip packs
+            async let sourcesResult = remindersService.fetchSources()
+            async let userSourcesResult = remindersService.fetchUserSources(userId: userId)
+            reminderSources = try await sourcesResult
+            userReminderSources = try await userSourcesResult
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -62,5 +81,53 @@ final class SetupViewModel {
             errorMessage = error.localizedDescription
         }
         isUpdatingLength = false
+    }
+
+    func saveSchedulingDirection() async {
+        guard let cycle else { return }
+        do {
+            try await supabase
+                .from("cycles")
+                .update(["scheduling_direction": schedulingDirection])
+                .eq("id", value: cycle.id.uuidString)
+                .execute()
+            self.cycle?.schedulingDirection = schedulingDirection
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func saveShowSeasons() async {
+        guard let cycle else { return }
+        do {
+            try await supabase
+                .from("cycles")
+                .update(["show_seasons": showSeasons])
+                .eq("id", value: cycle.id.uuidString)
+                .execute()
+            self.cycle?.showSeasons = showSeasons
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func toggleTipPack(sourceId: UUID, enabled: Bool) async {
+        guard let cycle else { return }
+        do {
+            try await remindersService.toggleSource(
+                userId: cycle.userId,
+                sourceId: sourceId,
+                enabled: enabled
+            )
+            // Update local state
+            if let idx = userReminderSources.firstIndex(where: { $0.sourceId == sourceId }) {
+                userReminderSources[idx].enabled = enabled
+            } else {
+                // Refresh from server to get the new record
+                userReminderSources = try await remindersService.fetchUserSources(userId: cycle.userId)
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
 }

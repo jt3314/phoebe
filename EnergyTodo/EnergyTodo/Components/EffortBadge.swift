@@ -5,11 +5,11 @@ struct EffortBadge: View {
 
     var body: some View {
         Text("\(points) pts")
-            .font(.caption2)
-            .fontWeight(.medium)
+            .font(.system(size: 10, weight: .medium))
             .padding(.horizontal, 8)
             .padding(.vertical, 3)
-            .background(Color.secondary.opacity(0.15))
+            .background(Theme.secondary)
+            .foregroundStyle(Theme.secondaryForeground)
             .clipShape(Capsule())
     }
 }
@@ -19,8 +19,7 @@ struct PriorityBadge: View {
 
     var body: some View {
         Text("\(priority)")
-            .font(.caption2)
-            .fontWeight(.bold)
+            .font(.system(size: 10, weight: .bold))
             .frame(width: 22, height: 22)
             .background(priorityColor.opacity(0.15))
             .foregroundStyle(priorityColor)
@@ -29,10 +28,10 @@ struct PriorityBadge: View {
 
     private var priorityColor: Color {
         switch priority {
-        case 1...3: return .green
-        case 4...6: return .orange
-        case 7...10: return .red
-        default: return .secondary
+        case 1...3: return Theme.success
+        case 4...6: return Theme.warning
+        case 7...10: return Theme.destructive
+        default: return Theme.mutedForeground
         }
     }
 }
