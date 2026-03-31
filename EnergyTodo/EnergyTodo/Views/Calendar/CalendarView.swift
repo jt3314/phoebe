@@ -3,7 +3,8 @@ import SwiftUI
 struct CalendarView: View {
     @Bindable var authVM: AuthViewModel
     @State private var vm = CalendarViewModel()
-    @State private var selectedDate: Date?
+    @State private var selectedDayDate: Date?
+    @State private var showDayDetail = false
 
     var body: some View {
         NavigationStack {
@@ -18,15 +19,15 @@ struct CalendarView: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .padding(.horizontal)
-                    .padding(.top, 8)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
 
                     if vm.cycle == nil && !vm.isLoading {
                         Spacer()
                         EmptyStateView(
                             icon: "calendar.badge.exclamationmark",
                             title: "No cycle configured",
-                            message: "Set up your energy cycle in the Setup tab to see your calendar."
+                            message: "Set up your energy cycle in Settings to see your calendar."
                         )
                         Spacer()
                     } else {
@@ -46,17 +47,35 @@ struct CalendarView: View {
                     await vm.load(userId: userId)
                 }
             }
+            .sheet(isPresented: $showDayDetail) {
+                if let date = selectedDayDate {
+                    let dateStr = CycleCalculator.formatISO(date)
+                    DayDetailSheet(
+                        date: date,
+                        dateString: dateStr,
+                        cycleDay: vm.cycleDayForDate(date),
+                        googleEvents: vm.googleEventsByDate[dateStr] ?? [],
+                        phoebeEvents: [],
+                        tasks: vm.tasksByDate[dateStr] ?? [],
+                        standaloneTasks: vm.standaloneByDate[dateStr] ?? [],
+                        effort: vm.effortForDate(date)
+                    )
+                }
+            }
         }
     }
 
     // MARK: - Month View
 
     private var monthView: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 12) {
+            // Month navigation
             HStack {
                 Button { vm.previousMonth() } label: {
                     Image(systemName: "chevron.left")
+                        .font(.body)
                         .foregroundStyle(Theme.foreground)
+                        .frame(width: 36, height: 36)
                 }
                 Spacer()
                 Text(vm.monthTitle)
@@ -65,46 +84,57 @@ struct CalendarView: View {
                 Spacer()
                 Button("Today") { vm.goToToday() }
                     .font(.caption)
+                    .fontWeight(.medium)
                     .foregroundStyle(Theme.primary)
                 Button { vm.nextMonth() } label: {
                     Image(systemName: "chevron.right")
+                        .font(.body)
                         .foregroundStyle(Theme.foreground)
+                        .frame(width: 36, height: 36)
                 }
             }
-            .padding(.horizontal)
-            .padding(.top, 8)
+            .padding(.horizontal, 16)
 
             // Weekday headers
             let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 4) {
+            HStack(spacing: 0) {
                 ForEach(weekdays, id: \.self) { day in
                     Text(day)
                         .font(.caption2)
-                        .fontWeight(.medium)
+                        .fontWeight(.semibold)
                         .foregroundStyle(Theme.mutedForeground)
+                        .frame(maxWidth: .infinity)
                 }
             }
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 12)
 
-            ScrollView {
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 4) {
-                    ForEach(0..<vm.firstWeekdayOffset, id: \.self) { _ in
-                        Color.clear.frame(height: 70)
-                    }
+            // Day grid
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 7), spacing: 6) {
+                // Offset for first day
+                ForEach(0..<vm.firstWeekdayOffset, id: \.self) { _ in
+                    Color.clear.frame(height: 56)
+                }
 
-                    ForEach(vm.daysInMonth, id: \.self) { date in
-                        MonthDayCellView(
-                            date: date,
-                            isToday: Calendar.current.isDateInToday(date),
-                            cycleDay: vm.cycleDayForDate(date),
-                            effort: vm.effortForDate(date),
-                            showCycleInfo: vm.showCycleInfo
-                        )
-                        .onTapGesture { selectedDate = date }
+                ForEach(vm.daysInMonth, id: \.self) { date in
+                    let dateStr = CycleCalculator.formatISO(date)
+                    let hasGoogleEvents = !(vm.googleEventsByDate[dateStr] ?? []).isEmpty
+                    MonthDayCellView(
+                        date: date,
+                        isToday: Calendar.current.isDateInToday(date),
+                        cycleDay: vm.cycleDayForDate(date),
+                        effort: vm.effortForDate(date),
+                        showCycleInfo: vm.showCycleInfo,
+                        hasGoogleEvents: hasGoogleEvents
+                    )
+                    .onTapGesture {
+                        selectedDayDate = date
+                        showDayDetail = true
                     }
                 }
-                .padding(.horizontal, 8)
             }
+            .padding(.horizontal, 12)
+
+            Spacer()
         }
     }
 
@@ -112,20 +142,24 @@ struct CalendarView: View {
 
     private var cycleView: some View {
         ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 8) {
-                ForEach(vm.cycleDays, id: \.day) { item in
-                    CycleDayCellView(
-                        day: item.day,
-                        effort: item.effort,
-                        intensity: vm.effortIntensity(effort: item.effort),
-                        isCurrentDay: vm.cycleDayForDate(Date()) == item.day
-                    )
+            VStack(spacing: 16) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 7), spacing: 6) {
+                    ForEach(vm.cycleDays, id: \.day) { item in
+                        CycleDayCellView(
+                            day: item.day,
+                            date: item.date,
+                            effort: item.effort,
+                            intensity: vm.effortIntensity(effort: item.effort),
+                            isCurrentDay: vm.cycleDayForDate(Date()) == item.day
+                        )
+                    }
                 }
-            }
-            .padding()
+                .padding(.horizontal, 12)
 
-            legendView
-                .padding(.horizontal)
+                legendView
+                    .padding(.horizontal, 16)
+            }
+            .padding(.top, 8)
         }
     }
 
@@ -138,14 +172,14 @@ struct CalendarView: View {
                 .fontWeight(.semibold)
                 .foregroundStyle(Theme.foreground)
 
-            HStack(spacing: 4) {
+            HStack(spacing: 3) {
                 Text("Low")
                     .font(.caption2)
                     .foregroundStyle(Theme.mutedForeground)
                 ForEach(Theme.lunarColors.indices, id: \.self) { i in
-                    RoundedRectangle(cornerRadius: 2)
+                    RoundedRectangle(cornerRadius: 3)
                         .fill(Theme.lunarColors[i])
-                        .frame(width: 20, height: 12)
+                        .frame(width: 24, height: 14)
                 }
                 Text("High")
                     .font(.caption2)
@@ -164,34 +198,64 @@ struct MonthDayCellView: View {
     let cycleDay: Int?
     let effort: (available: Int, scheduled: Int)?
     let showCycleInfo: Bool
+    var hasGoogleEvents: Bool = false
+
+    private let isWeekend: Bool
+
+    init(date: Date, isToday: Bool, cycleDay: Int?, effort: (available: Int, scheduled: Int)?, showCycleInfo: Bool, hasGoogleEvents: Bool = false) {
+        self.date = date
+        self.isToday = isToday
+        self.cycleDay = cycleDay
+        self.effort = effort
+        self.showCycleInfo = showCycleInfo
+        self.hasGoogleEvents = hasGoogleEvents
+        let wd = Calendar.current.component(.weekday, from: date)
+        self.isWeekend = wd == 1 || wd == 7
+    }
 
     var body: some View {
-        VStack(spacing: 2) {
-            Text("\(Calendar.current.component(.day, from: date))")
-                .font(.caption)
-                .fontWeight(isToday ? .bold : .regular)
-                .foregroundStyle(isToday ? Theme.primary : Theme.foreground)
+        VStack(spacing: 1) {
+            HStack(spacing: 2) {
+                Spacer()
+                Text("\(Calendar.current.component(.day, from: date))")
+                    .font(.system(size: 14, weight: isToday ? .bold : .medium))
+                    .foregroundStyle(isToday ? Theme.primary : Theme.foreground)
+                Spacer()
+            }
 
             if showCycleInfo, let cd = cycleDay {
                 Text("D\(cd)")
-                    .font(.system(size: 8))
+                    .font(.system(size: 9))
                     .foregroundStyle(Theme.mutedForeground)
             }
 
             if let effort {
                 Text("\(effort.scheduled)/\(effort.available)")
-                    .font(.system(size: 8))
+                    .font(.system(size: 9, weight: .medium))
                     .foregroundStyle(effortColor(scheduled: effort.scheduled, available: effort.available))
+            }
+
+            // Event indicator dots
+            if hasGoogleEvents {
+                Circle()
+                    .fill(Theme.primary.opacity(0.6))
+                    .frame(width: 4, height: 4)
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 70)
-        .background(isToday ? Theme.primary.opacity(0.08) : Theme.card)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .frame(height: 60)
+        .background(cellBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(isToday ? Theme.primary : Theme.cardBorder.opacity(0.5), lineWidth: isToday ? 1.5 : 0.5)
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(isToday ? Theme.primary : Color.clear, lineWidth: isToday ? 2 : 0)
         )
+    }
+
+    private var cellBackground: Color {
+        if isToday { return Theme.primary.opacity(0.12) }
+        if isWeekend { return Theme.muted.opacity(0.5) }
+        return Theme.card
     }
 
     private func effortColor(scheduled: Int, available: Int) -> Color {
@@ -205,20 +269,26 @@ struct MonthDayCellView: View {
 
 struct CycleDayCellView: View {
     let day: Int
+    let date: String
     let effort: Int
     let intensity: Double
     let isCurrentDay: Bool
 
     var body: some View {
-        VStack(spacing: 2) {
+        VStack(spacing: 1) {
             Text("D\(day)")
-                .font(.caption2)
-                .fontWeight(.medium)
+                .font(.system(size: 10, weight: .semibold))
             Text("\(effort)")
-                .font(.caption)
-                .fontWeight(.semibold)
+                .font(.system(size: 13, weight: .bold))
+
+            // Show short date
+            if let d = CycleCalculator.parseISO(date) {
+                Text(shortDate(d))
+                    .font(.system(size: 8))
+                    .opacity(0.7)
+            }
         }
-        .foregroundStyle(intensity > 0.85 ? .white : Theme.foreground)
+        .foregroundStyle(intensity > 0.8 ? .white : Theme.foreground)
         .frame(maxWidth: .infinity)
         .aspectRatio(1, contentMode: .fit)
         .background(lunarColor)
@@ -227,13 +297,24 @@ struct CycleDayCellView: View {
             Circle()
                 .stroke(isCurrentDay ? Theme.primary : Color.clear, lineWidth: 2.5)
         )
+        .scaleEffect(isWeekend ? 0.9 : 1.0)
+    }
+
+    private var isWeekend: Bool {
+        CycleCalculator.isWeekendDay(date: date)
     }
 
     private var lunarColor: Color {
-        if effort == 0 { return Theme.secondary.opacity(0.3) }
+        if effort == 0 { return Theme.secondary.opacity(0.2) }
         let colors = Theme.lunarColors
         let index = min(Int(intensity * Double(colors.count - 1)), colors.count - 1)
         return colors[index]
+    }
+
+    private func shortDate(_ d: Date) -> String {
+        let f = DateFormatter()
+        f.dateFormat = "M/d"
+        return f.string(from: d)
     }
 }
 

@@ -44,6 +44,13 @@ struct AuthService {
         }
     }
 
+    /// Sign in with a Google ID token via Supabase.
+    func signInWithGoogle(idToken: String, accessToken: String) async throws -> Auth.Session {
+        try await supabase.auth.signInWithIdToken(
+            credentials: .init(provider: .google, idToken: idToken, accessToken: accessToken)
+        )
+    }
+
     enum AuthError: LocalizedError {
         case noSession
 

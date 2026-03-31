@@ -19,7 +19,7 @@ struct SetupView: View {
                 setupContent
             }
         }
-        .navigationTitle("Cycle Setup")
+        .navigationTitle("Settings")
         .task {
             if let userId = authVM.currentUserId {
                 await vm.load(userId: userId)
@@ -192,6 +192,8 @@ struct SetupView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Theme.background)
     }
 }
 

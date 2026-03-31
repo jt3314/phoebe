@@ -13,6 +13,16 @@ final class TodayViewModel {
     var isLoading = false
     var errorMessage: String?
 
+    // Google Calendar events for the selected date
+    var googleEvents: [GoogleCalendarEvent] = []
+
+    // Phoebe-only events for the selected date
+    var phoebeEvents: [PhoebeEvent] = []
+
+    // Energy-aware nudges
+    var nudges: [Nudge] = []
+    var dismissedNudgeIds: Set<UUID> = []
+
     // Confetti state
     var showConfetti = false
     var completedTaskId: UUID?
@@ -25,6 +35,7 @@ final class TodayViewModel {
     private let cycleService = CycleService()
     private let fixedEventService = FixedEventService()
     private let projectService = ProjectService()
+    private let phoebeEventService = PhoebeEventService()
 
     var selectedDateString: String {
         CycleCalculator.formatISO(selectedDate)
@@ -96,16 +107,20 @@ final class TodayViewModel {
                 }
             }
 
-            // Fetch tasks, standalone tasks, and sleep check in parallel
+            // Fetch tasks, standalone tasks, sleep check, and Google events in parallel
             async let tasksResult = taskService.fetchTasksForDate(dateStr, userId: userId)
             async let standaloneResult = taskService.fetchStandaloneTasksForDate(dateStr, userId: userId)
             async let sleepResult = sleepService.fetch(userId: userId, date: dateStr)
             async let fixedEventsResult = fixedEventService.fetchForDate(userId: userId, date: dateStr)
+            async let googleEventsResult = GoogleCalendarService.fetchCachedEvents(userId: userId, date: dateStr)
+            async let phoebeEventsResult = phoebeEventService.fetchForDate(userId: userId, date: dateStr)
 
             projectTasks = try await tasksResult
             standaloneTasks = try await standaloneResult
             sleepCheck = try await sleepResult
             let fixedEvents = try await fixedEventsResult
+            googleEvents = (try? await googleEventsResult) ?? []
+            phoebeEvents = (try? await phoebeEventsResult) ?? []
 
             // Load project names for display
             let projectIds = Set(projectTasks.map(\.projectId))
@@ -125,8 +140,28 @@ final class TodayViewModel {
                     effortPoints: effortPointsMap,
                     weekendOverrides: overrides,
                     fixedEvents: fixedEvents,
+                    googleEvents: googleEvents,
+                    phoebeEvents: phoebeEvents,
                     sleepCheck: sleepCheck
                 )
+
+                // Generate nudges
+                let tomorrowStr = CycleCalculator.formatISO(CycleCalculator.addDays(selectedDate, 1))
+                let tomorrowEvents = (try? await GoogleCalendarService.fetchCachedEvents(userId: userId, date: tomorrowStr)) ?? []
+                let tomorrowCycleDay = CycleCalculator.getCycleDay(date: tomorrowStr, day1Date: cycle.day1Date, cycleLength: cycle.length)
+                let tomorrowBase = EffortCalculator.getBaseEffortForCycleDay(tomorrowCycleDay, effortPoints: effortPointsMap)
+
+                let nudgeInput = NudgeEngine.NudgeInput(
+                    cycleDay: effortBreakdown!.cycleDay,
+                    baseEffort: effortBreakdown!.baseEffort,
+                    googleEvents: googleEvents,
+                    tomorrowGoogleEvents: tomorrowEvents,
+                    tomorrowBaseEffort: tomorrowBase,
+                    sleepCheck: sleepCheck,
+                    totalScheduledTaskEffort: totalScheduledEffort,
+                    totalAvailableEffort: effortBreakdown!.totalAvailable
+                )
+                nudges = NudgeEngine.generateNudges(input: nudgeInput)
             }
         } catch {
             errorMessage = error.localizedDescription
@@ -165,6 +200,8 @@ final class TodayViewModel {
                     effortPoints: effortPointsMap,
                     weekendOverrides: overrides,
                     fixedEvents: fixedEvents,
+                    googleEvents: googleEvents,
+                    phoebeEvents: phoebeEvents,
                     sleepCheck: sleepCheck
                 )
             }
@@ -206,8 +243,33 @@ final class TodayViewModel {
         }
     }
 
+    func dismissNudge(_ nudge: Nudge) {
+        dismissedNudgeIds.insert(nudge.id)
+    }
+
+    var visibleNudges: [Nudge] {
+        nudges.filter { !dismissedNudgeIds.contains($0.id) }
+    }
+
     func dismissConfetti() {
         showConfetti = false
         completedTaskId = nil
+    }
+
+    /// Sync Google Calendar events for the current week, then reload.
+    @MainActor
+    func syncGoogleCalendar(userId: UUID) async {
+        let calendar = Calendar.current
+        let startOfWeek = calendar.date(byAdding: .day, value: -7, to: selectedDate) ?? selectedDate
+        let endOfWeek = calendar.date(byAdding: .day, value: 14, to: selectedDate) ?? selectedDate
+        let startStr = CycleCalculator.formatISO(startOfWeek)
+        let endStr = CycleCalculator.formatISO(endOfWeek)
+
+        do {
+            try await GoogleCalendarService.syncEvents(userId: userId, dateRange: startStr...endStr)
+            await load(userId: userId)
+        } catch {
+            // Sync failure is non-fatal — we still show cached data
+        }
     }
 }

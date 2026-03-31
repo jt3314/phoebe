@@ -15,6 +15,7 @@ final class CalendarViewModel {
     var effortPointsMap: [Int: Int] = [:]
     var tasksByDate: [String: [Task_]] = [:]
     var standaloneByDate: [String: [StandaloneTask]] = [:]
+    var googleEventsByDate: [String: [GoogleCalendarEvent]] = [:]
     var isLoading = false
 
     private let cycleService = CycleService()
@@ -125,6 +126,12 @@ final class CalendarViewModel {
             standaloneByDate = Dictionary(grouping: standalone.filter { $0.scheduledDate != nil }) {
                 $0.scheduledDate!
             }
+
+            // Load Google Calendar events for a wide range
+            let startDate = CycleCalculator.formatISO(Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date())
+            let endDate = CycleCalculator.formatISO(Calendar.current.date(byAdding: .month, value: 2, to: Date()) ?? Date())
+            let gEvents = (try? await GoogleCalendarService.fetchCachedEvents(userId: userId, startDate: startDate, endDate: endDate)) ?? []
+            googleEventsByDate = Dictionary(grouping: gEvents) { $0.date }
         } catch {
             // Silently handle - calendar still renders
         }

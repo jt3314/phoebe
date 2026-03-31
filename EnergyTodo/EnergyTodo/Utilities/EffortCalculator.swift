@@ -75,6 +75,8 @@ enum EffortCalculator {
         effortPoints: [Int: Int],
         weekendOverrides: [WeekendOverride] = [],
         fixedEvents: [FixedEvent] = [],
+        googleEvents: [GoogleCalendarEvent] = [],
+        phoebeEvents: [PhoebeEvent] = [],
         sleepCheck: SleepCheck? = nil
     ) -> Int {
         let cycleDay = CycleCalculator.getCycleDay(date: date, day1Date: day1Date, cycleLength: cycleLength)
@@ -91,6 +93,18 @@ enum EffortCalculator {
             .reduce(0) { $0 + $1.effortCost }
         effort -= fixedCost
 
+        // Subtract Google Calendar events
+        let googleCost = googleEvents
+            .filter { $0.date == date }
+            .reduce(0) { $0 + $1.effortCost }
+        effort -= googleCost
+
+        // Subtract Phoebe events
+        let phoebeCost = phoebeEvents
+            .filter { $0.date == date }
+            .reduce(0) { $0 + $1.effortCost }
+        effort -= phoebeCost
+
         // Sleep reduction
         if let sleep = sleepCheck, sleep.sleptPoorly {
             effort -= sleep.effortReduction > 0 ? sleep.effortReduction : 1
@@ -106,6 +120,8 @@ enum EffortCalculator {
         let baseEffort: Int
         let weekendOverride: Int?
         let fixedEventsEffort: Int
+        let googleEventsEffort: Int
+        let phoebeEventsEffort: Int
         let sleepReduction: Int
         let totalAvailable: Int
     }
@@ -118,6 +134,8 @@ enum EffortCalculator {
         effortPoints: [Int: Int],
         weekendOverrides: [WeekendOverride] = [],
         fixedEvents: [FixedEvent] = [],
+        googleEvents: [GoogleCalendarEvent] = [],
+        phoebeEvents: [PhoebeEvent] = [],
         sleepCheck: SleepCheck? = nil
     ) -> EffortBreakdown {
         let cycleDay = CycleCalculator.getCycleDay(date: date, day1Date: day1Date, cycleLength: cycleLength)
@@ -130,6 +148,14 @@ enum EffortCalculator {
             .filter { $0.date == date }
             .reduce(0) { $0 + $1.effortCost }
 
+        let googleEventsEffort = googleEvents
+            .filter { $0.date == date }
+            .reduce(0) { $0 + $1.effortCost }
+
+        let phoebeEventsEffort = phoebeEvents
+            .filter { $0.date == date }
+            .reduce(0) { $0 + $1.effortCost }
+
         let sleepReduction: Int
         if let sleep = sleepCheck, sleep.sleptPoorly {
             sleepReduction = sleep.effortReduction > 0 ? sleep.effortReduction : 1
@@ -138,13 +164,15 @@ enum EffortCalculator {
         }
 
         let effectiveBase = weekendOverrideValue ?? baseEffort
-        let totalAvailable = max(0, effectiveBase - fixedEventsEffort - sleepReduction)
+        let totalAvailable = max(0, effectiveBase - fixedEventsEffort - googleEventsEffort - phoebeEventsEffort - sleepReduction)
 
         return EffortBreakdown(
             cycleDay: cycleDay,
             baseEffort: baseEffort,
             weekendOverride: weekendOverrideValue,
             fixedEventsEffort: fixedEventsEffort,
+            googleEventsEffort: googleEventsEffort,
+            phoebeEventsEffort: phoebeEventsEffort,
             sleepReduction: sleepReduction,
             totalAvailable: totalAvailable
         )

@@ -22,12 +22,29 @@ final class AuthViewModel {
 
     /// Check for existing session on launch.
     func checkSession() async {
+        // Restore Google sign-in state
+        await GoogleAuthService.restorePreviousSignIn()
+
         if let session = await authService.currentSession() {
             _cachedUserId = session.user.id
             await checkOnboardingStatus(userId: session.user.id)
         } else {
             state = .unauthenticated
         }
+    }
+
+    @MainActor
+    func signInWithGoogle() async {
+        isProcessing = true
+        errorMessage = nil
+        do {
+            let session = try await GoogleAuthService.signIn()
+            _cachedUserId = session.user.id
+            await checkOnboardingStatus(userId: session.user.id)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+        isProcessing = false
     }
 
     func signIn() async {
@@ -60,7 +77,6 @@ final class AuthViewModel {
                 _cachedUserId = session.user.id
                 await checkOnboardingStatus(userId: session.user.id)
             } else {
-                // Email confirmation required
                 errorMessage = "Check your email for a confirmation link, then sign in."
                 state = .unauthenticated
             }
@@ -73,6 +89,7 @@ final class AuthViewModel {
     func signOut() async {
         do {
             try await authService.signOut()
+            GoogleAuthService.signOut()
             state = .unauthenticated
             email = ""
             password = ""

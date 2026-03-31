@@ -4,6 +4,7 @@ struct TodayView: View {
     @Bindable var authVM: AuthViewModel
     @State private var vm = TodayViewModel()
     @State private var showAddTask = false
+    @State private var showAddPhoebeEvent = false
     @State private var showReminders = false
     @State private var showDay1Banner = false
     @State private var projects: [Project] = []
@@ -40,9 +41,44 @@ struct TodayView: View {
                                     }
                                 }
 
+                                // Energy-aware nudges
+                                ForEach(vm.visibleNudges) { nudge in
+                                    NudgeBannerView(nudge: nudge) {
+                                        withAnimation { vm.dismissNudge(nudge) }
+                                    }
+                                }
+
                                 // Effort display
                                 if let breakdown = vm.effortBreakdown {
                                     effortCard(breakdown)
+                                }
+
+                                // Google Calendar events
+                                if !vm.googleEvents.isEmpty {
+                                    googleEventsSection
+                                }
+
+                                // Phoebe events
+                                if !vm.phoebeEvents.isEmpty {
+                                    phoebeEventsSection
+                                }
+
+                                // Add Self-Care button
+                                Button {
+                                    showAddPhoebeEvent = true
+                                } label: {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "heart.circle.fill")
+                                            .font(.caption)
+                                        Text("Add Self-Care")
+                                            .font(.caption)
+                                            .fontWeight(.medium)
+                                    }
+                                    .foregroundStyle(Theme.primary)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Theme.primary.opacity(0.1))
+                                    .clipShape(Capsule())
                                 }
 
                                 // Completion progress + Add Task button
@@ -136,6 +172,17 @@ struct TodayView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showAddPhoebeEvent) {
+                if let userId = authVM.currentUserId {
+                    AddPhoebeEventSheet(
+                        isPresented: $showAddPhoebeEvent,
+                        userId: userId,
+                        selectedDate: vm.selectedDateString
+                    ) {
+                        Task { await vm.load(userId: userId) }
+                    }
+                }
+            }
             .sheet(isPresented: $showReminders) {
                 if let breakdown = vm.effortBreakdown, let cycle = vm.cycle {
                     RemindersSidebarView(
@@ -148,9 +195,15 @@ struct TodayView: View {
                     )
                 }
             }
+            .refreshable {
+                if let userId = authVM.currentUserId {
+                    await vm.syncGoogleCalendar(userId: userId)
+                }
+            }
             .task {
                 if let userId = authVM.currentUserId {
-                    await vm.load(userId: userId)
+                    // Sync Google Calendar on load, then load data
+                    await vm.syncGoogleCalendar(userId: userId)
                     await loadProjects(userId: userId)
                     updateDay1Banner()
                 }
@@ -350,6 +403,120 @@ struct TodayView: View {
                 .padding(.vertical, 40)
             }
         }
+    }
+
+    // MARK: - Phoebe Events
+
+    private var phoebeEventsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Image(systemName: "heart.fill")
+                    .font(.caption)
+                    .foregroundStyle(Theme.primary)
+                Text("Phoebe Events")
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundStyle(Theme.mutedForeground)
+                Spacer()
+                if vm.phoebeEvents.reduce(0, { $0 + $1.effortCost }) > 0 {
+                    Text("-\(vm.phoebeEvents.reduce(0) { $0 + $1.effortCost }) pts")
+                        .font(.caption)
+                        .foregroundStyle(Theme.warning)
+                }
+            }
+
+            ForEach(vm.phoebeEvents) { event in
+                HStack(spacing: 10) {
+                    Image(systemName: event.eventType.icon)
+                        .font(.caption)
+                        .foregroundStyle(Theme.primary)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(event.name)
+                            .font(.subheadline)
+                            .foregroundStyle(Theme.foreground)
+
+                        Text(event.eventType.label)
+                            .font(.caption)
+                            .foregroundStyle(Theme.mutedForeground)
+                    }
+
+                    Spacer()
+
+                    if event.effortCost > 0 {
+                        EffortBadge(points: event.effortCost)
+                    }
+                }
+                .padding(10)
+                .background(Theme.card)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Theme.cardBorder, lineWidth: 0.5)
+                )
+            }
+        }
+    }
+
+    // MARK: - Google Calendar Events
+
+    private var googleEventsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Image(systemName: "calendar")
+                    .font(.caption)
+                    .foregroundStyle(Theme.primary)
+                Text("Google Calendar")
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundStyle(Theme.mutedForeground)
+                Spacer()
+                Text("-\(vm.googleEvents.reduce(0) { $0 + $1.effortCost }) pts")
+                    .font(.caption)
+                    .foregroundStyle(Theme.warning)
+            }
+
+            ForEach(vm.googleEvents) { event in
+                HStack(spacing: 10) {
+                    Circle()
+                        .fill(Theme.primary.opacity(0.3))
+                        .frame(width: 8, height: 8)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(event.summary)
+                            .font(.subheadline)
+                            .foregroundStyle(Theme.foreground)
+
+                        if !event.isAllDay {
+                            Text(formatEventTime(event))
+                                .font(.caption)
+                                .foregroundStyle(Theme.mutedForeground)
+                        } else {
+                            Text("All day")
+                                .font(.caption)
+                                .foregroundStyle(Theme.mutedForeground)
+                        }
+                    }
+
+                    Spacer()
+
+                    EffortBadge(points: event.effortCost)
+                }
+                .padding(10)
+                .background(Theme.card)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Theme.cardBorder, lineWidth: 0.5)
+                )
+            }
+        }
+    }
+
+    private func formatEventTime(_ event: GoogleCalendarEvent) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return "\(formatter.string(from: event.startTime)) - \(formatter.string(from: event.endTime))"
     }
 
     // MARK: - Helpers

@@ -5,41 +5,48 @@ struct ProjectsListView: View {
     @State private var vm = ProjectsViewModel()
 
     var body: some View {
-        Group {
-            if vm.isLoading {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if vm.projects.isEmpty {
-                EmptyStateView(
-                    icon: "folder.badge.plus",
-                    title: "No projects yet",
-                    message: "Create your first project to start scheduling tasks around your energy."
-                )
-            } else {
-                List {
-                    ForEach(vm.projects) { project in
-                        NavigationLink(value: project.id) {
-                            ProjectCardView(project: project, counts: vm.taskCounts[project.id])
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                Task { await vm.deleteProject(project) }
-                            } label: {
-                                Label("Delete", systemImage: "trash")
+        ZStack {
+            Theme.background.ignoresSafeArea()
+
+            Group {
+                if vm.isLoading {
+                    ProgressView()
+                        .tint(Theme.primary)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if vm.projects.isEmpty {
+                    EmptyStateView(
+                        icon: "folder.badge.plus",
+                        title: "No projects yet",
+                        message: "Create your first project to start scheduling tasks around your energy."
+                    )
+                } else {
+                    ScrollView {
+                        VStack(spacing: 12) {
+                            ForEach(vm.projects) { project in
+                                NavigationLink(value: project.id) {
+                                    ProjectCardView(project: project, counts: vm.taskCounts[project.id])
+                                }
+                                .buttonStyle(.plain)
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        Task { await vm.deleteProject(project) }
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                    Button {
+                                        Task { await vm.archiveProject(project) }
+                                    } label: {
+                                        Label("Archive", systemImage: "archivebox")
+                                    }
+                                }
                             }
-                            Button {
-                                Task { await vm.archiveProject(project) }
-                            } label: {
-                                Label("Archive", systemImage: "archivebox")
-                            }
-                            .tint(.orange)
                         }
+                        .padding(16)
                     }
                 }
-                .listStyle(.insetGrouped)
             }
         }
-        .navigationTitle("Projects")
+        .navigationTitle("Tasks")
         .navigationDestination(for: UUID.self) { projectId in
             ProjectDetailView(projectId: projectId, authVM: authVM)
         }
@@ -58,6 +65,7 @@ struct ProjectsListView: View {
                                 ProgressView()
                             } else {
                                 Label("Schedule", systemImage: "calendar.badge.clock")
+                                    .foregroundStyle(Theme.primary)
                             }
                         }
                     }
@@ -66,6 +74,7 @@ struct ProjectsListView: View {
                         vm.showNewProject = true
                     } label: {
                         Image(systemName: "plus")
+                            .foregroundStyle(Theme.primary)
                     }
                 }
             }
@@ -99,42 +108,51 @@ struct ProjectCardView: View {
             HStack {
                 Text(project.name)
                     .font(.headline)
+                    .foregroundStyle(Theme.foreground)
                 Spacer()
                 PriorityBadge(priority: project.priority)
             }
 
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
                 if let deadline = project.deadline {
                     Label(deadline, systemImage: "calendar")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Theme.mutedForeground)
                 }
 
                 Text(project.type.rawValue.capitalized)
                     .font(.caption2)
+                    .fontWeight(.medium)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
-                    .background(project.type == .professional ? Color.blue.opacity(0.15) : Color.green.opacity(0.15))
+                    .background(project.type == .professional ? Color.blue.opacity(0.12) : Theme.success.opacity(0.12))
+                    .foregroundStyle(project.type == .professional ? .blue : Theme.success)
                     .clipShape(Capsule())
 
                 if let counts {
                     Text("\(counts.completed)/\(counts.total) tasks")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Theme.mutedForeground)
                     Text("\(counts.effort) pts")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Theme.mutedForeground)
                 }
             }
 
             if let desc = project.description, !desc.isEmpty {
                 Text(desc)
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Theme.mutedForeground)
                     .lineLimit(2)
             }
         }
-        .padding(.vertical, 4)
+        .padding(14)
+        .background(Theme.card)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Theme.cardBorder, lineWidth: 0.5)
+        )
     }
 }
 
@@ -168,6 +186,8 @@ struct NewProjectSheet: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Theme.background)
             .navigationTitle("New Project")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
