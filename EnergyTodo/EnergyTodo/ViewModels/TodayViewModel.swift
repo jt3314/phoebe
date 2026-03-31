@@ -30,12 +30,17 @@ final class TodayViewModel {
     // Project name lookup for display
     var projectNames: [UUID: String] = [:]
 
+    // Tips / reminders for inline display
+    var reminders: [Reminder] = []
+    var reminderSources: [UUID: ReminderSource] = [:]
+
     private let taskService = TaskService()
     private let sleepService = SleepCheckService()
     private let cycleService = CycleService()
     private let fixedEventService = FixedEventService()
     private let projectService = ProjectService()
     private let phoebeEventService = PhoebeEventService()
+    private let remindersService = RemindersService()
 
     var selectedDateString: String {
         CycleCalculator.formatISO(selectedDate)
@@ -128,6 +133,21 @@ final class TodayViewModel {
                 if let project = try? await projectService.fetchById(pid) {
                     projectNames[pid] = project.name
                 }
+            }
+
+            // Load tips/reminders for inline display
+            do {
+                let allSources = try await remindersService.fetchSources()
+                let userSources = try await remindersService.fetchUserSources(userId: userId)
+                let enabledIds = userSources.filter(\.enabled).map(\.sourceId)
+                reminderSources = Dictionary(uniqueKeysWithValues: allSources.map { ($0.id, $0) })
+                if !enabledIds.isEmpty {
+                    reminders = try await remindersService.fetchReminders(sourceIds: enabledIds)
+                } else {
+                    reminders = []
+                }
+            } catch {
+                reminders = []
             }
 
             // Calculate effort breakdown
@@ -254,6 +274,23 @@ final class TodayViewModel {
     func dismissConfetti() {
         showConfetti = false
         completedTaskId = nil
+    }
+
+    func remindersForCurrentDay() -> [Reminder] {
+        guard let cycleDay = effortBreakdown?.cycleDay else { return [] }
+        return reminders.filter { r in
+            if let min = r.cycleDayMin, cycleDay < min { return false }
+            if let max = r.cycleDayMax, cycleDay > max { return false }
+            return true
+        }
+    }
+
+    func sourceName(for reminder: Reminder) -> String {
+        reminderSources[reminder.sourceId]?.name ?? "Tip"
+    }
+
+    func sourceIcon(for reminder: Reminder) -> String {
+        reminderSources[reminder.sourceId]?.icon ?? "lightbulb"
     }
 
     /// Sync Google Calendar events for the current week, then reload.

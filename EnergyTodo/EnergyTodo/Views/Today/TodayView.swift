@@ -53,6 +53,11 @@ struct TodayView: View {
                                     effortCard(breakdown)
                                 }
 
+                                // Tips for today
+                                if !vm.remindersForCurrentDay().isEmpty {
+                                    tipsSection
+                                }
+
                                 // Google Calendar events
                                 if !vm.googleEvents.isEmpty {
                                     googleEventsSection
@@ -362,6 +367,68 @@ struct TodayView: View {
             Spacer()
         }
         .themedCard()
+    }
+
+    // MARK: - Tips Section
+
+    private var tipsSection: some View {
+        let tips = vm.remindersForCurrentDay()
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Image(systemName: "lightbulb.fill")
+                    .font(.caption)
+                    .foregroundStyle(Theme.warning)
+                Text("Tips for Today")
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundStyle(Theme.mutedForeground)
+                Spacer()
+                Button {
+                    showReminders = true
+                } label: {
+                    Text("See all")
+                        .font(.caption2)
+                        .foregroundStyle(Theme.primary)
+                }
+            }
+
+            ForEach(tips) { reminder in
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(reminder.title)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Theme.foreground)
+
+                    if let body = reminder.body, !body.isEmpty {
+                        Text(body)
+                            .font(.caption)
+                            .foregroundStyle(Theme.mutedForeground)
+                            .lineLimit(3)
+                    }
+
+                    // Source indicator
+                    HStack(spacing: 4) {
+                        Image(systemName: vm.sourceIcon(for: reminder))
+                            .font(.system(size: 9))
+                        Text(vm.sourceName(for: reminder))
+                            .font(.system(size: 10))
+                    }
+                    .foregroundStyle(Theme.primary.opacity(0.8))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Theme.primary.opacity(0.08))
+                    .clipShape(Capsule())
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Theme.card)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Theme.cardBorder, lineWidth: 0.5)
+                )
+            }
+        }
     }
 
     // MARK: - Task List
