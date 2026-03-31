@@ -1,0 +1,841 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0209E74C10C15DC954F95954 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDFB6F2C36EFBEBCB1056D2 /* PlannerView.swift */; };
+		0CD4C393A548BE1EA9BE8BE8 /* PlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698AC323B690411E566D367 /* PlannerViewModel.swift */; };
+		11D25D8652135F1D5FA707F3 /* SchedulingConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D001DB1E376D20CAA6A07A /* SchedulingConflict.swift */; };
+		1450174512EFF3245FC3E4B1 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = E5E48AF76B2F8F5D4B06D478 /* Supabase */; };
+		1A8FCDF2550E59BFAF42853D /* EffortCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33767FEF566632EACE4623E /* EffortCalculatorTests.swift */; };
+		1EE28FEF593EB9F48907467D /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BA4B6287F3C21C28C4E379 /* DailyNote.swift */; };
+		21E88DBA245F3601DBD2F410 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5DD44684453137BB84D8C /* ConfettiView.swift */; };
+		270605C604D8BFF53C7D3FD7 /* EffortBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89960A31C2A25F0E1063C1B /* EffortBadge.swift */; };
+		29F60F25293DE9E5BBB66BF4 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E899B7EFD8C4612CBA9C2873 /* Reminder.swift */; };
+		2A479B3C63D2DBB381E1D814 /* DependencyResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C2AD0806A4E32937E91E8 /* DependencyResolverTests.swift */; };
+		2AEE13F379140FDDF0236516 /* SeasonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C5837486095C7F98EEC42B /* SeasonConstants.swift */; };
+		2B1337ED82510C4A06736456 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D658E0E7554B8D59707C8227 /* OnboardingContainerView.swift */; };
+		2C94CAF1758EFE3494405234 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA4D8F747EFCCC0F6E0F2BB /* MainTabView.swift */; };
+		30F0662D89475409DA422AAD /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69CE84DFF959FF01F9F61B /* SignInView.swift */; };
+		3D8D8F3B0C2A284C455B5701 /* RemindersSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031B69C83AB9CCBDD7A5B19 /* RemindersSidebarView.swift */; };
+		474C54686EF8C5FF44362E7C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0058F6DD0215DCA822C2C0 /* Project.swift */; };
+		50BC94BC1D48DD79BA1B5462 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED132CE17972CCFF29E2956 /* ProjectDetailViewModel.swift */; };
+		548F8D711E314E862135308F /* SchedulingDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E05EEE21ED765F805380A /* SchedulingDirectionView.swift */; };
+		55090688D070AFFDC55FB494 /* ConflictsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DCE81B2ABB1D0E1A77947 /* ConflictsListView.swift */; };
+		55CB2EA4D642424D63206DBF /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFC7F4DBDAC4B425C42ECF /* ProjectDetailView.swift */; };
+		62FC009BC31F301EE143E095 /* DependencyResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523C30F56DEBA1FC47AF5BF /* DependencyResolver.swift */; };
+		6408DE3A50F6CDE4E2D9BA68 /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02450FF90DE5F746A6C935 /* ProjectService.swift */; };
+		645ED76353CA5A091CB4F67D /* CycleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C5B86302479B94F14BA79F /* CycleService.swift */; };
+		708B0380BBFBF1643A91AAD2 /* TipPacksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C61AE84E8D2865D1EEC7340 /* TipPacksView.swift */; };
+		7092F52338018F97D9A98A37 /* RemindersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF9E36159A57847C1E07797 /* RemindersService.swift */; };
+		74D78DB7762EA0A685CCFDA3 /* CycleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729637C20702F1AFE56E9F40 /* CycleNote.swift */; };
+		794778AB2A9FB4B75B50DD1C /* UpcomingFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E76C779AB71F32D2FFA09C /* UpcomingFeaturesView.swift */; };
+		7A1BE1752A68E290F1CA79CD /* PhaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97902E30127AF9EAFF3300 /* PhaseConstants.swift */; };
+		7E4D4E8572FC4AC89DAEE8BC /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1631D6A3FAC8476FD45F /* OnboardingViewModel.swift */; };
+		7F344E0B71FA896B4D1D5181 /* SleepCheckBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17AEC553E85794D4852427C /* SleepCheckBanner.swift */; };
+		84D83DC940F495C4636F6D26 /* StandaloneTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D995E65694A0770A685C2A01 /* StandaloneTask.swift */; };
+		852FD9C85A0F3AB7442F8703 /* Day1BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E442FEDC917380566A8BB95C /* Day1BannerView.swift */; };
+		868FB3CDB0A264C70073B7CA /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61689717156D3C992EDE3F52 /* ProjectsListView.swift */; };
+		86F6435E74500116AD7284C7 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9EEDEFAD3FDA0E85D3768 /* EmptyStateView.swift */; };
+		88CDA88FA988F24DD01076BE /* EffortCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998343B61E604D6E87EFACA8 /* EffortCalculator.swift */; };
+		8D0B9B773FF1519F278889D9 /* FixedEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CF49AD7AF4747DF3D42ADB /* FixedEventService.swift */; };
+		8D4B135C79E3739B19C15F84 /* ConflictsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C094DB62B4A053CF0E053DE6 /* ConflictsViewModel.swift */; };
+		8EE3E3B1BF9DBDB2AA9577D2 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E87A31A7EFA3A373D8F917 /* CalendarViewModel.swift */; };
+		955A36E6F5570B34FDD872BE /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665AEB77F26AE703036E9D26 /* AppConstants.swift */; };
+		987CC26C8AF0BBFE1D1C9317 /* AddTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3FD0B4CA3E44D294824B9 /* AddTaskSheet.swift */; };
+		9B5619C88C112FCCB669D2F1 /* RemindersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E287DFCA4509150C7C41FF /* RemindersViewModel.swift */; };
+		9CF74D9FA662DDE59930E649 /* ProjectsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CFA366AEC184F60D0102E /* ProjectsViewModel.swift */; };
+		9ED1DD0396D003612E2E5F77 /* CycleCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775D28C97269D8F9C2D5413 /* CycleCalculator.swift */; };
+		9F314C719B570B6D4FBB780E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B57316F62E9C27C635D41 /* Theme.swift */; };
+		A16A0A358AD666BDEF70CEF8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27DA34DF1AB1227EE9D036C /* AuthViewModel.swift */; };
+		A69008B9F2727B65C4813230 /* SleepCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BE0081E9DEE7CB2318A86 /* SleepCheckService.swift */; };
+		A8A3FCC851E9E7E1B24C9DD3 /* FixedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693B958C27E2CFEC5B916E /* FixedEvent.swift */; };
+		AEE210FC38D589C99D554147 /* SetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B72A1A58583B20911940E9 /* SetupViewModel.swift */; };
+		B17E0E17D6022F82F5A7E6C7 /* Microcopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59827B5CFF26CDBCA883C4F /* Microcopy.swift */; };
+		B2CA929746363D0BC6E1ACCE /* FeatureInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A386AA7A229541A371978C /* FeatureInterest.swift */; };
+		B396F09BC4AEEF36FF6F31C0 /* RecurrenceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA496D0856A7B9657000C31C /* RecurrenceUtils.swift */; };
+		BE3383BFDFBFCA914BC34078 /* ConflictService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CE16987CDFE619A7E80230 /* ConflictService.swift */; };
+		C0B8C1E0A87C1AAF3B05295C /* UserReminderSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7928421965B052FE9634B23 /* UserReminderSource.swift */; };
+		C1EC4760E90CF8BC91B6AFB9 /* CycleCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D55215A27B0909D1A098B9 /* CycleCalculatorTests.swift */; };
+		C959896FF6A97B7B92FD877C /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E847C92237AB12C71BCAD638 /* Cycle.swift */; };
+		CB005978F457291F7641942A /* ReminderSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03AC3C9DBAA4F50E44F336 /* ReminderSource.swift */; };
+		CD5847BAF15C49D0C16D91C2 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CB68223088F62D7F8C9230 /* Milestone.swift */; };
+		D1B698AA2663B778FE51C79C /* SchedulerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA9222E161EA009E97BE45 /* SchedulerService.swift */; };
+		D40489673664AA3CADF8C600 /* NotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36ED5457885F06B2028A9E /* NotesService.swift */; };
+		E4DF74356B9E36D40FF2DDEB /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169445745E89A5F2726FA6FC /* SetupView.swift */; };
+		E9028691E3323198808E6B96 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FEF9056BC627F6FC3D766 /* TodayView.swift */; };
+		EABB8A4CD99E551090862072 /* Task_.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20D9EDCDBB191025674B3E5 /* Task_.swift */; };
+		EEFE0BED706430223FAF8062 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C504155C8CCD7F66794760B /* SupabaseConfig.swift */; };
+		EF8CD296263CB12E6A8902E7 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F9A8CAAEFA714BF4A09CC2 /* TodayViewModel.swift */; };
+		EF97BC669EB8408EEC9AF8FA /* TaskDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80A7E5D8AB79036C81B95D5 /* TaskDependency.swift */; };
+		F0CFE05D67B661C98047E17F /* EnergyTodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5AE1CC7147349E3A1BD7B5 /* EnergyTodoApp.swift */; };
+		F1B2BC605A70731FEF89DF0E /* SleepCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396154130CC01A8528C676AB /* SleepCheck.swift */; };
+		F2231AE9C7C404936C9E45CD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59A647A0EBC72F555BD0FF1 /* CalendarView.swift */; };
+		F943A3DD20938323869C95B6 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97145698707C53497821E00 /* TaskService.swift */; };
+		FD3E86F306BE52B0F7FAC3A0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE50D8077280DDA54AD0C40 /* AuthService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D89ED3E51D6CF4E698551DA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53597AE3BEF3955BFE7288AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5437DB348CDC3F3E9127D165;
+			remoteInfo = EnergyTodo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C03AC3C9DBAA4F50E44F336 /* ReminderSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSource.swift; sourceTree = "<group>"; };
+		0C97902E30127AF9EAFF3300 /* PhaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseConstants.swift; sourceTree = "<group>"; };
+		0E02450FF90DE5F746A6C935 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
+		0ED132CE17972CCFF29E2956 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
+		169445745E89A5F2726FA6FC /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		1CDFB6F2C36EFBEBCB1056D2 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
+		38E76C779AB71F32D2FFA09C /* UpcomingFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingFeaturesView.swift; sourceTree = "<group>"; };
+		396154130CC01A8528C676AB /* SleepCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCheck.swift; sourceTree = "<group>"; };
+		3A0FEF9056BC627F6FC3D766 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		3A693B958C27E2CFEC5B916E /* FixedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedEvent.swift; sourceTree = "<group>"; };
+		3AA5DD44684453137BB84D8C /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		459BE0081E9DEE7CB2318A86 /* SleepCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCheckService.swift; sourceTree = "<group>"; };
+		4A69CE84DFF959FF01F9F61B /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		57F9A8CAAEFA714BF4A09CC2 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		5FF9E36159A57847C1E07797 /* RemindersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersService.swift; sourceTree = "<group>"; };
+		61689717156D3C992EDE3F52 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
+		62CB68223088F62D7F8C9230 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
+		62D3FD0B4CA3E44D294824B9 /* AddTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSheet.swift; sourceTree = "<group>"; };
+		64E5551F3564C833FECA06D5 /* EnergyTodo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EnergyTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6523C30F56DEBA1FC47AF5BF /* DependencyResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyResolver.swift; sourceTree = "<group>"; };
+		665AEB77F26AE703036E9D26 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		6775D28C97269D8F9C2D5413 /* CycleCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleCalculator.swift; sourceTree = "<group>"; };
+		729637C20702F1AFE56E9F40 /* CycleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleNote.swift; sourceTree = "<group>"; };
+		7A36ED5457885F06B2028A9E /* NotesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesService.swift; sourceTree = "<group>"; };
+		7BEA9222E161EA009E97BE45 /* SchedulerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerService.swift; sourceTree = "<group>"; };
+		7C0F1631D6A3FAC8476FD45F /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		7C2DCE81B2ABB1D0E1A77947 /* ConflictsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictsListView.swift; sourceTree = "<group>"; };
+		81CF49AD7AF4747DF3D42ADB /* FixedEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedEventService.swift; sourceTree = "<group>"; };
+		86B72A1A58583B20911940E9 /* SetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewModel.swift; sourceTree = "<group>"; };
+		88C5837486095C7F98EEC42B /* SeasonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonConstants.swift; sourceTree = "<group>"; };
+		8C504155C8CCD7F66794760B /* SupabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseConfig.swift; sourceTree = "<group>"; };
+		998343B61E604D6E87EFACA8 /* EffortCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffortCalculator.swift; sourceTree = "<group>"; };
+		9C61AE84E8D2865D1EEC7340 /* TipPacksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPacksView.swift; sourceTree = "<group>"; };
+		9DE50D8077280DDA54AD0C40 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A02B57316F62E9C27C635D41 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A80A7E5D8AB79036C81B95D5 /* TaskDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDependency.swift; sourceTree = "<group>"; };
+		AD0058F6DD0215DCA822C2C0 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		BA496D0856A7B9657000C31C /* RecurrenceUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceUtils.swift; sourceTree = "<group>"; };
+		C094DB62B4A053CF0E053DE6 /* ConflictsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictsViewModel.swift; sourceTree = "<group>"; };
+		C17AEC553E85794D4852427C /* SleepCheckBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCheckBanner.swift; sourceTree = "<group>"; };
+		C2D001DB1E376D20CAA6A07A /* SchedulingConflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingConflict.swift; sourceTree = "<group>"; };
+		C2E287DFCA4509150C7C41FF /* RemindersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewModel.swift; sourceTree = "<group>"; };
+		C59827B5CFF26CDBCA883C4F /* Microcopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Microcopy.swift; sourceTree = "<group>"; };
+		C698AC323B690411E566D367 /* PlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewModel.swift; sourceTree = "<group>"; };
+		C8C5B86302479B94F14BA79F /* CycleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleService.swift; sourceTree = "<group>"; };
+		C9E87A31A7EFA3A373D8F917 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		CDA9EEDEFAD3FDA0E85D3768 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		D3BA4B6287F3C21C28C4E379 /* DailyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNote.swift; sourceTree = "<group>"; };
+		D3CE16987CDFE619A7E80230 /* ConflictService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictService.swift; sourceTree = "<group>"; };
+		D658E0E7554B8D59707C8227 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		D94E05EEE21ED765F805380A /* SchedulingDirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingDirectionView.swift; sourceTree = "<group>"; };
+		D995E65694A0770A685C2A01 /* StandaloneTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandaloneTask.swift; sourceTree = "<group>"; };
+		DFA4D8F747EFCCC0F6E0F2BB /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		E22FAA929DE9A20E3505B9C0 /* EnergyTodoTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = EnergyTodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E33767FEF566632EACE4623E /* EffortCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffortCalculatorTests.swift; sourceTree = "<group>"; };
+		E442FEDC917380566A8BB95C /* Day1BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1BannerView.swift; sourceTree = "<group>"; };
+		E59A647A0EBC72F555BD0FF1 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		E7928421965B052FE9634B23 /* UserReminderSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReminderSource.swift; sourceTree = "<group>"; };
+		E847C92237AB12C71BCAD638 /* Cycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cycle.swift; sourceTree = "<group>"; };
+		E899B7EFD8C4612CBA9C2873 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		EC5AE1CC7147349E3A1BD7B5 /* EnergyTodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyTodoApp.swift; sourceTree = "<group>"; };
+		F031B69C83AB9CCBDD7A5B19 /* RemindersSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersSidebarView.swift; sourceTree = "<group>"; };
+		F20D9EDCDBB191025674B3E5 /* Task_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task_.swift; sourceTree = "<group>"; };
+		F27DA34DF1AB1227EE9D036C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		F36C2AD0806A4E32937E91E8 /* DependencyResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyResolverTests.swift; sourceTree = "<group>"; };
+		F3A386AA7A229541A371978C /* FeatureInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureInterest.swift; sourceTree = "<group>"; };
+		F46CFA366AEC184F60D0102E /* ProjectsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewModel.swift; sourceTree = "<group>"; };
+		F4AFC7F4DBDAC4B425C42ECF /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		F6D55215A27B0909D1A098B9 /* CycleCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleCalculatorTests.swift; sourceTree = "<group>"; };
+		F89960A31C2A25F0E1063C1B /* EffortBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffortBadge.swift; sourceTree = "<group>"; };
+		F97145698707C53497821E00 /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C946A4ACDB230B8C7D7A8DCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1450174512EFF3245FC3E4B1 /* Supabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		231375E69DB4AC4879141863 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3AA5DD44684453137BB84D8C /* ConfettiView.swift */,
+				F89960A31C2A25F0E1063C1B /* EffortBadge.swift */,
+				CDA9EEDEFAD3FDA0E85D3768 /* EmptyStateView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		28C67285D234B509BC449A07 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E847C92237AB12C71BCAD638 /* Cycle.swift */,
+				729637C20702F1AFE56E9F40 /* CycleNote.swift */,
+				D3BA4B6287F3C21C28C4E379 /* DailyNote.swift */,
+				F3A386AA7A229541A371978C /* FeatureInterest.swift */,
+				3A693B958C27E2CFEC5B916E /* FixedEvent.swift */,
+				62CB68223088F62D7F8C9230 /* Milestone.swift */,
+				AD0058F6DD0215DCA822C2C0 /* Project.swift */,
+				E899B7EFD8C4612CBA9C2873 /* Reminder.swift */,
+				0C03AC3C9DBAA4F50E44F336 /* ReminderSource.swift */,
+				C2D001DB1E376D20CAA6A07A /* SchedulingConflict.swift */,
+				396154130CC01A8528C676AB /* SleepCheck.swift */,
+				D995E65694A0770A685C2A01 /* StandaloneTask.swift */,
+				F20D9EDCDBB191025674B3E5 /* Task_.swift */,
+				A80A7E5D8AB79036C81B95D5 /* TaskDependency.swift */,
+				E7928421965B052FE9634B23 /* UserReminderSource.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3FD9FA98B7E0718889CB92AE /* EnergyTodo */ = {
+			isa = PBXGroup;
+			children = (
+				EC5AE1CC7147349E3A1BD7B5 /* EnergyTodoApp.swift */,
+				231375E69DB4AC4879141863 /* Components */,
+				491B130D4F5E7A2455142859 /* Config */,
+				28C67285D234B509BC449A07 /* Models */,
+				ADD4080F6A7568D1092C5395 /* Services */,
+				DA6D525A406DD8ABC440D074 /* Utilities */,
+				D3F09426E47131C8E93887DE /* ViewModels */,
+				A58E5A9846945A70A010F9C3 /* Views */,
+			);
+			path = EnergyTodo;
+			sourceTree = "<group>";
+		};
+		431160C552DFF467690D499D /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				D94E05EEE21ED765F805380A /* SchedulingDirectionView.swift */,
+				169445745E89A5F2726FA6FC /* SetupView.swift */,
+				9C61AE84E8D2865D1EEC7340 /* TipPacksView.swift */,
+				38E76C779AB71F32D2FFA09C /* UpcomingFeaturesView.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		43C27ABA76C62A2B6D46036B /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				E59A647A0EBC72F555BD0FF1 /* CalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		491B130D4F5E7A2455142859 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				665AEB77F26AE703036E9D26 /* AppConstants.swift */,
+				8C504155C8CCD7F66794760B /* SupabaseConfig.swift */,
+				A02B57316F62E9C27C635D41 /* Theme.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		591E44272BD1D5265F38C787 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				F4AFC7F4DBDAC4B425C42ECF /* ProjectDetailView.swift */,
+				61689717156D3C992EDE3F52 /* ProjectsListView.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		5A0C30585D6706B0C604C3A5 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D658E0E7554B8D59707C8227 /* OnboardingContainerView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		77C032A45A2CB739803F266B /* Planner */ = {
+			isa = PBXGroup;
+			children = (
+				1CDFB6F2C36EFBEBCB1056D2 /* PlannerView.swift */,
+			);
+			path = Planner;
+			sourceTree = "<group>";
+		};
+		83385B7CB8C9E37AA18BE6A1 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				62D3FD0B4CA3E44D294824B9 /* AddTaskSheet.swift */,
+				E442FEDC917380566A8BB95C /* Day1BannerView.swift */,
+				F031B69C83AB9CCBDD7A5B19 /* RemindersSidebarView.swift */,
+				C17AEC553E85794D4852427C /* SleepCheckBanner.swift */,
+				3A0FEF9056BC627F6FC3D766 /* TodayView.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		8866D801B2A20F99C6AAE1ED /* Conflicts */ = {
+			isa = PBXGroup;
+			children = (
+				7C2DCE81B2ABB1D0E1A77947 /* ConflictsListView.swift */,
+			);
+			path = Conflicts;
+			sourceTree = "<group>";
+		};
+		913C89A5BEFD248F083066FA /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				DFA4D8F747EFCCC0F6E0F2BB /* MainTabView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		9E6C3D76F36240E433937761 /* EnergyTodoTests */ = {
+			isa = PBXGroup;
+			children = (
+				F6D55215A27B0909D1A098B9 /* CycleCalculatorTests.swift */,
+				F36C2AD0806A4E32937E91E8 /* DependencyResolverTests.swift */,
+				E33767FEF566632EACE4623E /* EffortCalculatorTests.swift */,
+			);
+			path = EnergyTodoTests;
+			sourceTree = "<group>";
+		};
+		A58E5A9846945A70A010F9C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E6F8C8C4EA2E5016A166A6FE /* Auth */,
+				43C27ABA76C62A2B6D46036B /* Calendar */,
+				8866D801B2A20F99C6AAE1ED /* Conflicts */,
+				913C89A5BEFD248F083066FA /* Dashboard */,
+				5A0C30585D6706B0C604C3A5 /* Onboarding */,
+				77C032A45A2CB739803F266B /* Planner */,
+				591E44272BD1D5265F38C787 /* Projects */,
+				431160C552DFF467690D499D /* Setup */,
+				83385B7CB8C9E37AA18BE6A1 /* Today */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ADD4080F6A7568D1092C5395 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9DE50D8077280DDA54AD0C40 /* AuthService.swift */,
+				D3CE16987CDFE619A7E80230 /* ConflictService.swift */,
+				C8C5B86302479B94F14BA79F /* CycleService.swift */,
+				81CF49AD7AF4747DF3D42ADB /* FixedEventService.swift */,
+				7A36ED5457885F06B2028A9E /* NotesService.swift */,
+				0E02450FF90DE5F746A6C935 /* ProjectService.swift */,
+				5FF9E36159A57847C1E07797 /* RemindersService.swift */,
+				7BEA9222E161EA009E97BE45 /* SchedulerService.swift */,
+				459BE0081E9DEE7CB2318A86 /* SleepCheckService.swift */,
+				F97145698707C53497821E00 /* TaskService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D3F09426E47131C8E93887DE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F27DA34DF1AB1227EE9D036C /* AuthViewModel.swift */,
+				C9E87A31A7EFA3A373D8F917 /* CalendarViewModel.swift */,
+				C094DB62B4A053CF0E053DE6 /* ConflictsViewModel.swift */,
+				7C0F1631D6A3FAC8476FD45F /* OnboardingViewModel.swift */,
+				C698AC323B690411E566D367 /* PlannerViewModel.swift */,
+				0ED132CE17972CCFF29E2956 /* ProjectDetailViewModel.swift */,
+				F46CFA366AEC184F60D0102E /* ProjectsViewModel.swift */,
+				C2E287DFCA4509150C7C41FF /* RemindersViewModel.swift */,
+				86B72A1A58583B20911940E9 /* SetupViewModel.swift */,
+				57F9A8CAAEFA714BF4A09CC2 /* TodayViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		DA6D525A406DD8ABC440D074 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6775D28C97269D8F9C2D5413 /* CycleCalculator.swift */,
+				6523C30F56DEBA1FC47AF5BF /* DependencyResolver.swift */,
+				998343B61E604D6E87EFACA8 /* EffortCalculator.swift */,
+				C59827B5CFF26CDBCA883C4F /* Microcopy.swift */,
+				0C97902E30127AF9EAFF3300 /* PhaseConstants.swift */,
+				BA496D0856A7B9657000C31C /* RecurrenceUtils.swift */,
+				88C5837486095C7F98EEC42B /* SeasonConstants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E391B544E126DAEC4CD46204 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64E5551F3564C833FECA06D5 /* EnergyTodo.app */,
+				E22FAA929DE9A20E3505B9C0 /* EnergyTodoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E6F8C8C4EA2E5016A166A6FE /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				4A69CE84DFF959FF01F9F61B /* SignInView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FDE95166B1625428646191FD = {
+			isa = PBXGroup;
+			children = (
+				3FD9FA98B7E0718889CB92AE /* EnergyTodo */,
+				9E6C3D76F36240E433937761 /* EnergyTodoTests */,
+				E391B544E126DAEC4CD46204 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		"TEMP_1B2B4ABC-148B-434E-8016-A80F4D4B8F89" /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		"TEMP_69A4ED79-C075-436A-8A0E-6EF936E60986" /* EnergyTodo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EnergyTodo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5437DB348CDC3F3E9127D165 /* EnergyTodo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FEE16FEDC327CC047A736AE /* Build configuration list for PBXNativeTarget "EnergyTodo" */;
+			buildPhases = (
+				3A3133E2C598BFABE22CAE28 /* Sources */,
+				C946A4ACDB230B8C7D7A8DCA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EnergyTodo;
+			packageProductDependencies = (
+				E5E48AF76B2F8F5D4B06D478 /* Supabase */,
+			);
+			productName = EnergyTodo;
+			productReference = 64E5551F3564C833FECA06D5 /* EnergyTodo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7057250FE22786C7E9739DF /* EnergyTodoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA0DA27025A11436C90DDA45 /* Build configuration list for PBXNativeTarget "EnergyTodoTests" */;
+			buildPhases = (
+				F407971A4B2CBC800FBFA009 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				148BC94B6A0A50385D91F4A8 /* PBXTargetDependency */,
+			);
+			name = EnergyTodoTests;
+			packageProductDependencies = (
+			);
+			productName = EnergyTodoTests;
+			productReference = E22FAA929DE9A20E3505B9C0 /* EnergyTodoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		53597AE3BEF3955BFE7288AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 08162538F47553C05B6F8795 /* Build configuration list for PBXProject "EnergyTodo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = FDE95166B1625428646191FD;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4C364AE3840CE0666C68BBB6 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E391B544E126DAEC4CD46204 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5437DB348CDC3F3E9127D165 /* EnergyTodo */,
+				E7057250FE22786C7E9739DF /* EnergyTodoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A3133E2C598BFABE22CAE28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				987CC26C8AF0BBFE1D1C9317 /* AddTaskSheet.swift in Sources */,
+				955A36E6F5570B34FDD872BE /* AppConstants.swift in Sources */,
+				FD3E86F306BE52B0F7FAC3A0 /* AuthService.swift in Sources */,
+				A16A0A358AD666BDEF70CEF8 /* AuthViewModel.swift in Sources */,
+				F2231AE9C7C404936C9E45CD /* CalendarView.swift in Sources */,
+				8EE3E3B1BF9DBDB2AA9577D2 /* CalendarViewModel.swift in Sources */,
+				21E88DBA245F3601DBD2F410 /* ConfettiView.swift in Sources */,
+				BE3383BFDFBFCA914BC34078 /* ConflictService.swift in Sources */,
+				55090688D070AFFDC55FB494 /* ConflictsListView.swift in Sources */,
+				8D4B135C79E3739B19C15F84 /* ConflictsViewModel.swift in Sources */,
+				C959896FF6A97B7B92FD877C /* Cycle.swift in Sources */,
+				9ED1DD0396D003612E2E5F77 /* CycleCalculator.swift in Sources */,
+				74D78DB7762EA0A685CCFDA3 /* CycleNote.swift in Sources */,
+				645ED76353CA5A091CB4F67D /* CycleService.swift in Sources */,
+				1EE28FEF593EB9F48907467D /* DailyNote.swift in Sources */,
+				852FD9C85A0F3AB7442F8703 /* Day1BannerView.swift in Sources */,
+				62FC009BC31F301EE143E095 /* DependencyResolver.swift in Sources */,
+				270605C604D8BFF53C7D3FD7 /* EffortBadge.swift in Sources */,
+				88CDA88FA988F24DD01076BE /* EffortCalculator.swift in Sources */,
+				86F6435E74500116AD7284C7 /* EmptyStateView.swift in Sources */,
+				F0CFE05D67B661C98047E17F /* EnergyTodoApp.swift in Sources */,
+				B2CA929746363D0BC6E1ACCE /* FeatureInterest.swift in Sources */,
+				A8A3FCC851E9E7E1B24C9DD3 /* FixedEvent.swift in Sources */,
+				8D0B9B773FF1519F278889D9 /* FixedEventService.swift in Sources */,
+				2C94CAF1758EFE3494405234 /* MainTabView.swift in Sources */,
+				B17E0E17D6022F82F5A7E6C7 /* Microcopy.swift in Sources */,
+				CD5847BAF15C49D0C16D91C2 /* Milestone.swift in Sources */,
+				D40489673664AA3CADF8C600 /* NotesService.swift in Sources */,
+				2B1337ED82510C4A06736456 /* OnboardingContainerView.swift in Sources */,
+				7E4D4E8572FC4AC89DAEE8BC /* OnboardingViewModel.swift in Sources */,
+				7A1BE1752A68E290F1CA79CD /* PhaseConstants.swift in Sources */,
+				0209E74C10C15DC954F95954 /* PlannerView.swift in Sources */,
+				0CD4C393A548BE1EA9BE8BE8 /* PlannerViewModel.swift in Sources */,
+				474C54686EF8C5FF44362E7C /* Project.swift in Sources */,
+				55CB2EA4D642424D63206DBF /* ProjectDetailView.swift in Sources */,
+				50BC94BC1D48DD79BA1B5462 /* ProjectDetailViewModel.swift in Sources */,
+				6408DE3A50F6CDE4E2D9BA68 /* ProjectService.swift in Sources */,
+				868FB3CDB0A264C70073B7CA /* ProjectsListView.swift in Sources */,
+				9CF74D9FA662DDE59930E649 /* ProjectsViewModel.swift in Sources */,
+				B396F09BC4AEEF36FF6F31C0 /* RecurrenceUtils.swift in Sources */,
+				29F60F25293DE9E5BBB66BF4 /* Reminder.swift in Sources */,
+				CB005978F457291F7641942A /* ReminderSource.swift in Sources */,
+				7092F52338018F97D9A98A37 /* RemindersService.swift in Sources */,
+				3D8D8F3B0C2A284C455B5701 /* RemindersSidebarView.swift in Sources */,
+				9B5619C88C112FCCB669D2F1 /* RemindersViewModel.swift in Sources */,
+				D1B698AA2663B778FE51C79C /* SchedulerService.swift in Sources */,
+				11D25D8652135F1D5FA707F3 /* SchedulingConflict.swift in Sources */,
+				548F8D711E314E862135308F /* SchedulingDirectionView.swift in Sources */,
+				2AEE13F379140FDDF0236516 /* SeasonConstants.swift in Sources */,
+				E4DF74356B9E36D40FF2DDEB /* SetupView.swift in Sources */,
+				AEE210FC38D589C99D554147 /* SetupViewModel.swift in Sources */,
+				30F0662D89475409DA422AAD /* SignInView.swift in Sources */,
+				F1B2BC605A70731FEF89DF0E /* SleepCheck.swift in Sources */,
+				7F344E0B71FA896B4D1D5181 /* SleepCheckBanner.swift in Sources */,
+				A69008B9F2727B65C4813230 /* SleepCheckService.swift in Sources */,
+				84D83DC940F495C4636F6D26 /* StandaloneTask.swift in Sources */,
+				EEFE0BED706430223FAF8062 /* SupabaseConfig.swift in Sources */,
+				EF97BC669EB8408EEC9AF8FA /* TaskDependency.swift in Sources */,
+				F943A3DD20938323869C95B6 /* TaskService.swift in Sources */,
+				EABB8A4CD99E551090862072 /* Task_.swift in Sources */,
+				9F314C719B570B6D4FBB780E /* Theme.swift in Sources */,
+				708B0380BBFBF1643A91AAD2 /* TipPacksView.swift in Sources */,
+				E9028691E3323198808E6B96 /* TodayView.swift in Sources */,
+				EF8CD296263CB12E6A8902E7 /* TodayViewModel.swift in Sources */,
+				794778AB2A9FB4B75B50DD1C /* UpcomingFeaturesView.swift in Sources */,
+				C0B8C1E0A87C1AAF3B05295C /* UserReminderSource.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F407971A4B2CBC800FBFA009 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1EC4760E90CF8BC91B6AFB9 /* CycleCalculatorTests.swift in Sources */,
+				2A479B3C63D2DBB381E1D814 /* DependencyResolverTests.swift in Sources */,
+				1A8FCDF2550E59BFAF42853D /* EffortCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		148BC94B6A0A50385D91F4A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5437DB348CDC3F3E9127D165 /* EnergyTodo */;
+			targetProxy = D89ED3E51D6CF4E698551DA0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		253736D146E170B7A1C57A84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Energy Todo";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2A0DEBC5353469588C9B8FCC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.EnergyTodoTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EnergyTodo.app/EnergyTodo";
+			};
+			name = Release;
+		};
+		7BB2A1392753D57C6176F513 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.EnergyTodoTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EnergyTodo.app/EnergyTodo";
+			};
+			name = Debug;
+		};
+		BD8808F0815365E494F22C1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D36AD79CF0BD4E86ABC9FB74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DB0FA5817F9CBB014CA140BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Energy Todo";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08162538F47553C05B6F8795 /* Build configuration list for PBXProject "EnergyTodo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD8808F0815365E494F22C1B /* Debug */,
+				D36AD79CF0BD4E86ABC9FB74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6FEE16FEDC327CC047A736AE /* Build configuration list for PBXNativeTarget "EnergyTodo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB0FA5817F9CBB014CA140BB /* Debug */,
+				253736D146E170B7A1C57A84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EA0DA27025A11436C90DDA45 /* Build configuration list for PBXNativeTarget "EnergyTodoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BB2A1392753D57C6176F513 /* Debug */,
+				2A0DEBC5353469588C9B8FCC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4C364AE3840CE0666C68BBB6 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E5E48AF76B2F8F5D4B06D478 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C364AE3840CE0666C68BBB6 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 53597AE3BEF3955BFE7288AC /* Project object */;
+}
