@@ -18,24 +18,14 @@ enum GoogleAuthService {
     }
 
     /// Perform Google Sign-In via Supabase OAuth (opens in-app browser).
+    /// The session comes back via URL redirect handled by onOpenURL in EnergyTodoApp.
     @MainActor
-    static func signIn() async throws -> Auth.Session {
+    static func signIn() async throws {
         try await supabase.auth.signInWithOAuth(
             provider: .google,
-            scopes: calendarScope,
-            redirectTo: URL(string: "com.tinyglobe.phoebe://login-callback")
+            redirectTo: URL(string: "com.tinyglobe.phoebe://login-callback"),
+            scopes: calendarScope
         )
-
-        // Wait for the session to be established after redirect
-        for await (event, session) in supabase.auth.authStateChanges {
-            if event == .signedIn, let session {
-                // After OAuth sign-in, restore Google Sign-In to get calendar access token
-                await restorePreviousSignIn()
-                return session
-            }
-        }
-
-        throw GoogleAuthError.missingIdToken
     }
 
     // MARK: - Token Management
