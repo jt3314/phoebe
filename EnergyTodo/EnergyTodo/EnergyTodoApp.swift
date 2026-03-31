@@ -1,5 +1,4 @@
 import SwiftUI
-import GoogleSignIn
 
 @main
 struct EnergyTodoApp: App {
@@ -22,9 +21,6 @@ struct EnergyTodoApp: App {
             }
             .task {
                 await authVM.checkSession()
-            }
-            .onOpenURL { url in
-                GIDSignIn.sharedInstance.handle(url)
             }
         }
     }

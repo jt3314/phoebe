@@ -22,9 +22,6 @@ final class AuthViewModel {
 
     /// Check for existing session on launch.
     func checkSession() async {
-        // Restore Google sign-in state
-        await GoogleAuthService.restorePreviousSignIn()
-
         if let session = await authService.currentSession() {
             _cachedUserId = session.user.id
             await checkOnboardingStatus(userId: session.user.id)
