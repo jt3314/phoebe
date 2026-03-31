@@ -11,6 +11,7 @@
 		0CD4C393A548BE1EA9BE8BE8 /* PlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698AC323B690411E566D367 /* PlannerViewModel.swift */; };
 		11D25D8652135F1D5FA707F3 /* SchedulingConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D001DB1E376D20CAA6A07A /* SchedulingConflict.swift */; };
 		1450174512EFF3245FC3E4B1 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = E5E48AF76B2F8F5D4B06D478 /* Supabase */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F2E1D0C9B8A7F6E5D4C3B2A1 /* GoogleSignIn */; };
 		1A8FCDF2550E59BFAF42853D /* EffortCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33767FEF566632EACE4623E /* EffortCalculatorTests.swift */; };
 		1EE28FEF593EB9F48907467D /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BA4B6287F3C21C28C4E379 /* DailyNote.swift */; };
 		21E88DBA245F3601DBD2F410 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5DD44684453137BB84D8C /* ConfettiView.swift */; };
@@ -77,6 +78,17 @@
 		F2231AE9C7C404936C9E45CD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59A647A0EBC72F555BD0FF1 /* CalendarView.swift */; };
 		F943A3DD20938323869C95B6 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97145698707C53497821E00 /* TaskService.swift */; };
 		FD3E86F306BE52B0F7FAC3A0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE50D8077280DDA54AD0C40 /* AuthService.swift */; };
+		AA0001010101010101010101 /* GoogleCalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0001010101010101010101 /* GoogleCalendarEvent.swift */; };
+		AA0002020202020202020202 /* Nudge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0002020202020202020202 /* Nudge.swift */; };
+		AA0003030303030303030303 /* PhoebeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0003030303030303030303 /* PhoebeEvent.swift */; };
+		AA0004040404040404040404 /* GoogleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0004040404040404040404 /* GoogleAuthService.swift */; };
+		AA0005050505050505050505 /* GoogleCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0005050505050505050505 /* GoogleCalendarService.swift */; };
+		AA0006060606060606060606 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0006060606060606060606 /* KeychainService.swift */; };
+		AA0007070707070707070707 /* PhoebeEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0007070707070707070707 /* PhoebeEventService.swift */; };
+		AA0008080808080808080808 /* NudgeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0008080808080808080808 /* NudgeEngine.swift */; };
+		AA0009090909090909090909 /* DayDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0009090909090909090909 /* DayDetailSheet.swift */; };
+		AA000A0A0A0A0A0A0A0A0A0A /* AddPhoebeEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000A0A0A0A0A0A0A0A0A0A /* AddPhoebeEventSheet.swift */; };
+		AA000B0B0B0B0B0B0B0B0B0B /* NudgeBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000B0B0B0B0B0B0B0B0B0B /* NudgeBannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +173,17 @@
 		F6D55215A27B0909D1A098B9 /* CycleCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleCalculatorTests.swift; sourceTree = "<group>"; };
 		F89960A31C2A25F0E1063C1B /* EffortBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffortBadge.swift; sourceTree = "<group>"; };
 		F97145698707C53497821E00 /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
+		BB0001010101010101010101 /* GoogleCalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarEvent.swift; sourceTree = "<group>"; };
+		BB0002020202020202020202 /* Nudge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nudge.swift; sourceTree = "<group>"; };
+		BB0003030303030303030303 /* PhoebeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoebeEvent.swift; sourceTree = "<group>"; };
+		BB0004040404040404040404 /* GoogleAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthService.swift; sourceTree = "<group>"; };
+		BB0005050505050505050505 /* GoogleCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarService.swift; sourceTree = "<group>"; };
+		BB0006060606060606060606 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		BB0007070707070707070707 /* PhoebeEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoebeEventService.swift; sourceTree = "<group>"; };
+		BB0008080808080808080808 /* NudgeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NudgeEngine.swift; sourceTree = "<group>"; };
+		BB0009090909090909090909 /* DayDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailSheet.swift; sourceTree = "<group>"; };
+		BB000A0A0A0A0A0A0A0A0A0A /* AddPhoebeEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhoebeEventSheet.swift; sourceTree = "<group>"; };
+		BB000B0B0B0B0B0B0B0B0B0B /* NudgeBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NudgeBannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1450174512EFF3245FC3E4B1 /* Supabase in Frameworks */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +217,10 @@
 				D3BA4B6287F3C21C28C4E379 /* DailyNote.swift */,
 				F3A386AA7A229541A371978C /* FeatureInterest.swift */,
 				3A693B958C27E2CFEC5B916E /* FixedEvent.swift */,
+				BB0001010101010101010101 /* GoogleCalendarEvent.swift */,
 				62CB68223088F62D7F8C9230 /* Milestone.swift */,
+				BB0002020202020202020202 /* Nudge.swift */,
+				BB0003030303030303030303 /* PhoebeEvent.swift */,
 				AD0058F6DD0215DCA822C2C0 /* Project.swift */,
 				E899B7EFD8C4612CBA9C2873 /* Reminder.swift */,
 				0C03AC3C9DBAA4F50E44F336 /* ReminderSource.swift */,
@@ -237,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				E59A647A0EBC72F555BD0FF1 /* CalendarView.swift */,
+				BB0009090909090909090909 /* DayDetailSheet.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -279,8 +307,10 @@
 		83385B7CB8C9E37AA18BE6A1 /* Today */ = {
 			isa = PBXGroup;
 			children = (
+				BB000A0A0A0A0A0A0A0A0A0A /* AddPhoebeEventSheet.swift */,
 				62D3FD0B4CA3E44D294824B9 /* AddTaskSheet.swift */,
 				E442FEDC917380566A8BB95C /* Day1BannerView.swift */,
+				BB000B0B0B0B0B0B0B0B0B0B /* NudgeBannerView.swift */,
 				F031B69C83AB9CCBDD7A5B19 /* RemindersSidebarView.swift */,
 				C17AEC553E85794D4852427C /* SleepCheckBanner.swift */,
 				3A0FEF9056BC627F6FC3D766 /* TodayView.swift */,
@@ -337,7 +367,11 @@
 				D3CE16987CDFE619A7E80230 /* ConflictService.swift */,
 				C8C5B86302479B94F14BA79F /* CycleService.swift */,
 				81CF49AD7AF4747DF3D42ADB /* FixedEventService.swift */,
+				BB0004040404040404040404 /* GoogleAuthService.swift */,
+				BB0005050505050505050505 /* GoogleCalendarService.swift */,
+				BB0006060606060606060606 /* KeychainService.swift */,
 				7A36ED5457885F06B2028A9E /* NotesService.swift */,
+				BB0007070707070707070707 /* PhoebeEventService.swift */,
 				0E02450FF90DE5F746A6C935 /* ProjectService.swift */,
 				5FF9E36159A57847C1E07797 /* RemindersService.swift */,
 				7BEA9222E161EA009E97BE45 /* SchedulerService.swift */,
@@ -371,6 +405,7 @@
 				6523C30F56DEBA1FC47AF5BF /* DependencyResolver.swift */,
 				998343B61E604D6E87EFACA8 /* EffortCalculator.swift */,
 				C59827B5CFF26CDBCA883C4F /* Microcopy.swift */,
+				BB0008080808080808080808 /* NudgeEngine.swift */,
 				0C97902E30127AF9EAFF3300 /* PhaseConstants.swift */,
 				BA496D0856A7B9657000C31C /* RecurrenceUtils.swift */,
 				88C5837486095C7F98EEC42B /* SeasonConstants.swift */,
@@ -435,6 +470,7 @@
 			name = EnergyTodo;
 			packageProductDependencies = (
 				E5E48AF76B2F8F5D4B06D478 /* Supabase */,
+				F2E1D0C9B8A7F6E5D4C3B2A1 /* GoogleSignIn */,
 			);
 			productName = EnergyTodo;
 			productReference = 64E5551F3564C833FECA06D5 /* EnergyTodo.app */;
@@ -480,6 +516,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				4C364AE3840CE0666C68BBB6 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				B3A4C5D6E7F8091A2B3C4D5E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E391B544E126DAEC4CD46204 /* Products */;
@@ -521,6 +558,10 @@
 				B2CA929746363D0BC6E1ACCE /* FeatureInterest.swift in Sources */,
 				A8A3FCC851E9E7E1B24C9DD3 /* FixedEvent.swift in Sources */,
 				8D0B9B773FF1519F278889D9 /* FixedEventService.swift in Sources */,
+				AA0001010101010101010101 /* GoogleCalendarEvent.swift in Sources */,
+				AA0004040404040404040404 /* GoogleAuthService.swift in Sources */,
+				AA0005050505050505050505 /* GoogleCalendarService.swift in Sources */,
+				AA0006060606060606060606 /* KeychainService.swift in Sources */,
 				2C94CAF1758EFE3494405234 /* MainTabView.swift in Sources */,
 				B17E0E17D6022F82F5A7E6C7 /* Microcopy.swift in Sources */,
 				CD5847BAF15C49D0C16D91C2 /* Milestone.swift in Sources */,
@@ -591,10 +632,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NRXNLZZ6K9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Energy Todo";
+				INFOPLIST_KEY_CFBundleDisplayName = Phoebe;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Phoebe reads your Google Calendar to show your schedule and adjust your energy budget.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -604,7 +648,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -620,7 +664,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.EnergyTodoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EnergyTodo.app/EnergyTodo";
@@ -636,7 +680,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.EnergyTodoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EnergyTodo.app/EnergyTodo";
@@ -766,10 +810,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NRXNLZZ6K9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Energy Todo";
+				INFOPLIST_KEY_CFBundleDisplayName = Phoebe;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Phoebe reads your Google Calendar to show your schedule and adjust your energy budget.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -779,7 +826,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.energytodo.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -827,6 +874,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		B3A4C5D6E7F8091A2B3C4D5E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -834,6 +889,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4C364AE3840CE0666C68BBB6 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		F2E1D0C9B8A7F6E5D4C3B2A1 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3A4C5D6E7F8091A2B3C4D5E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
