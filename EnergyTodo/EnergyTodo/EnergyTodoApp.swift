@@ -1,8 +1,13 @@
 import SwiftUI
+import GoogleSignIn
 
 @main
 struct EnergyTodoApp: App {
     @State private var authVM = AuthViewModel()
+
+    init() {
+        GoogleAuthService.configure()
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -21,6 +26,9 @@ struct EnergyTodoApp: App {
             }
             .task {
                 await authVM.checkSession()
+            }
+            .onOpenURL { url in
+                GIDSignIn.sharedInstance.handle(url)
             }
         }
     }

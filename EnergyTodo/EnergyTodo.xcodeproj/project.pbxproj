@@ -644,6 +644,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NRXNLZZ6K9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnergyTodo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Phoebe;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Phoebe reads your Google Calendar to show your schedule and adjust your energy budget.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -822,6 +823,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NRXNLZZ6K9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnergyTodo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Phoebe;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Phoebe reads your Google Calendar to show your schedule and adjust your energy budget.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
