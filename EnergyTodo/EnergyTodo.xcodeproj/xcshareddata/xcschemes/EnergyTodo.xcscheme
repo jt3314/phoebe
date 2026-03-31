@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5437DB348CDC3F3E9127D165"
-               BuildableName = "EnergyTodo.app"
+               BuildableName = "Phoebe.app"
                BlueprintName = "EnergyTodo"
                ReferencedContainer = "container:EnergyTodo.xcodeproj">
             </BuildableReference>
@@ -58,7 +58,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5437DB348CDC3F3E9127D165"
-            BuildableName = "EnergyTodo.app"
+            BuildableName = "Phoebe.app"
             BlueprintName = "EnergyTodo"
             ReferencedContainer = "container:EnergyTodo.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5437DB348CDC3F3E9127D165"
-            BuildableName = "EnergyTodo.app"
+            BuildableName = "Phoebe.app"
             BlueprintName = "EnergyTodo"
             ReferencedContainer = "container:EnergyTodo.xcodeproj">
          </BuildableReference>

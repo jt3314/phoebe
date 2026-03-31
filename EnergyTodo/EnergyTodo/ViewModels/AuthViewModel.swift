@@ -37,13 +37,26 @@ final class AuthViewModel {
         isProcessing = true
         errorMessage = nil
         do {
+            // This opens a browser for OAuth — session comes back via URL redirect
             let session = try await GoogleAuthService.signIn()
             _cachedUserId = session.user.id
             await checkOnboardingStatus(userId: session.user.id)
         } catch {
-            errorMessage = error.localizedDescription
+            // Don't show error if user just cancelled
+            let desc = error.localizedDescription
+            if !desc.contains("cancelled") && !desc.contains("canceled") {
+                errorMessage = desc
+            }
         }
         isProcessing = false
+    }
+
+    /// Called when Supabase session is established via OAuth redirect.
+    func handleSessionFromURL() async {
+        if let session = await authService.currentSession() {
+            _cachedUserId = session.user.id
+            await checkOnboardingStatus(userId: session.user.id)
+        }
     }
 
     func signIn() async {

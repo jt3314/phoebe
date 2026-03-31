@@ -1,5 +1,4 @@
 import SwiftUI
-import GoogleSignIn
 
 @main
 struct EnergyTodoApp: App {
@@ -28,7 +27,10 @@ struct EnergyTodoApp: App {
                 await authVM.checkSession()
             }
             .onOpenURL { url in
-                GIDSignIn.sharedInstance.handle(url)
+                Task {
+                    try? await supabase.auth.session(from: url)
+                    await authVM.handleSessionFromURL()
+                }
             }
         }
     }

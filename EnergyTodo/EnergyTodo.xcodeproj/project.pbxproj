@@ -643,20 +643,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NRXNLZZ6K9;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EnergyTodo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Phoebe;
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "Phoebe reads your Google Calendar to show your schedule and adjust your energy budget.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe;
+				PRODUCT_NAME = Phoebe;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -675,7 +669,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EnergyTodo.app/EnergyTodo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Phoebe.app/Phoebe";
 			};
 			name = Release;
 		};
@@ -691,7 +685,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EnergyTodo.app/EnergyTodo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Phoebe.app/Phoebe";
 			};
 			name = Debug;
 		};
@@ -822,20 +816,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NRXNLZZ6K9;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EnergyTodo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Phoebe;
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "Phoebe reads your Google Calendar to show your schedule and adjust your energy budget.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tinyglobe.phoebe;
+				PRODUCT_NAME = Phoebe;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";

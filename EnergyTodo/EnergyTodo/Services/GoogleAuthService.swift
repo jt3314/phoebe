@@ -1,4 +1,5 @@
 import Foundation
+import AuthenticationServices
 import GoogleSignIn
 import Supabase
 
@@ -16,40 +17,30 @@ enum GoogleAuthService {
         GIDSignIn.sharedInstance.configuration = config
     }
 
-    /// Perform Google Sign-In with calendar scope, then create a Supabase session.
-    /// Returns the Supabase session on success.
+    /// Perform Google Sign-In via Supabase OAuth (opens in-app browser).
     @MainActor
     static func signIn() async throws -> Auth.Session {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let rootVC = windowScene.windows.first?.rootViewController else {
-            throw GoogleAuthError.noRootViewController
-        }
-
-        // Sign in with Google, requesting calendar scope
-        let result = try await GIDSignIn.sharedInstance.signIn(
-            withPresenting: rootVC,
-            hint: nil,
-            additionalScopes: [calendarScope]
+        try await supabase.auth.signInWithOAuth(
+            provider: .google,
+            scopes: calendarScope,
+            redirectTo: URL(string: "com.tinyglobe.phoebe://login-callback")
         )
 
-        let user = result.user
-        guard let idToken = user.idToken?.tokenString else {
-            throw GoogleAuthError.missingIdToken
+        // Wait for the session to be established after redirect
+        for await (event, session) in supabase.auth.authStateChanges {
+            if event == .signedIn, let session {
+                // After OAuth sign-in, restore Google Sign-In to get calendar access token
+                await restorePreviousSignIn()
+                return session
+            }
         }
 
-        // Store Google tokens for Calendar API access
-        KeychainService.googleAccessToken = user.accessToken.tokenString
-
-        // Exchange Google ID token for Supabase session
-        let session = try await supabase.auth.signInWithIdToken(
-            credentials: .init(provider: .google, idToken: idToken, accessToken: user.accessToken.tokenString)
-        )
-
-        return session
+        throw GoogleAuthError.missingIdToken
     }
 
+    // MARK: - Token Management
+
     /// Silently refresh the Google access token.
-    /// Returns the new access token, or nil if refresh fails.
     @MainActor
     static func refreshTokenIfNeeded() async -> String? {
         guard let currentUser = GIDSignIn.sharedInstance.currentUser else { return nil }
@@ -73,6 +64,11 @@ enum GoogleAuthService {
             }
             return await refreshTokenIfNeeded()
         }
+        // Fall back to stored token from Supabase OAuth session
+        if let session = try? await supabase.auth.session,
+           let providerToken = session.providerToken {
+            return providerToken
+        }
         return KeychainService.googleAccessToken
     }
 
@@ -90,7 +86,7 @@ enum GoogleAuthService {
             let user = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
             KeychainService.googleAccessToken = user.accessToken.tokenString
         } catch {
-            // No previous session — user will need to sign in again
+            // No previous session — calendar sync will use Supabase provider token
         }
     }
 
@@ -101,7 +97,7 @@ enum GoogleAuthService {
         var errorDescription: String? {
             switch self {
             case .noRootViewController: return "Unable to find root view controller for sign-in."
-            case .missingIdToken: return "Google sign-in did not return an ID token."
+            case .missingIdToken: return "Google sign-in did not return a session."
             }
         }
     }
